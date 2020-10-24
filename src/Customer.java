@@ -1,7 +1,7 @@
 
 public class Customer {
-	String name;
-	String cellphoneNumber;
+	private String name;
+	private String cellphoneNumber;
 	
 	public Customer(String name, String cellphoneNumber) {
 		this.name = name;

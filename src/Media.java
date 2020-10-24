@@ -1,9 +1,9 @@
 
 public class Media {
 	
-	int articleNumber;
-	String title;
-	int price;
+	private int articleNumber;
+	private String title;
+	private int price;
 	
 	public Media(int articleNumber, String title, int price){
 		this.articleNumber = articleNumber;
