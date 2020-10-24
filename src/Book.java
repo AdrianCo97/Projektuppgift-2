@@ -10,5 +10,12 @@ public class Book extends Media {
 		this.publisher = publisher;
 		
 	}
+	
+    public void printBook() {
+		System.out.println(this.articleNumber + "(Book)" + this.title);
+	}
+	
+	
+	
 
 }

@@ -2,9 +2,13 @@ import java.util.*;
 
 public class Main {
 	
+	static ArrayList<Media> mediaList = new ArrayList<>();
 	
+	static int counter = 0;
 	
 	public static void list() {
+		
+		
 		// Metod som skriver en lista på alla böcker i lagret(utlånade eller ej.
 		// Om en produkt är utlånad ska kundens namn och telefonnummer visas.
 
@@ -12,6 +16,15 @@ public class Main {
 		// 832-337-2959
 
 		// Inga argument
+		
+		if(counter == 0) {
+			System.out.println("There are no books or movies in stock.");
+		}
+		else {
+			for(Media m : mediaList) {
+				System.out.println(m.articleNumber + ", " + m.title);
+			}
+		}
 	}
 	
 	public static void checkOut(int articleNumber) {
@@ -36,26 +49,85 @@ public class Main {
 		//Argumentet tar emot artikelnummer som argument.
 	}
 	
-	public static void register(int articleNumber) {
-		//Metod för att lägga till en ny produkt och registrera den i systemet
+	public static void register() { 
 		
-		//inga argument
+		 
 		
-		//What are you registering? Book (b), Movie (m)
-//		> m
-//		Enter product ID: 
-//		> 77777
-//		Enter title: 
-//		> The Dark Knight
-//		Enter value: 
-//		> 199
-//		Enter length: 
-//		> 152
-//		Enter rating: 
-//		> 9.0
-//		Successfully registered The Dark Knight!
+		Scanner scanner = new Scanner(System.in);
 		
-		//Såhär ska flödet i metoden se ut.
+		System.out.println("What are you registering? Book(b) or a Movie(m)");
+		
+		String input = scanner.next();
+		
+		
+		try {
+			if (input.equals("b")) {
+				System.out.println("Enter the product ID:");
+				int articleNumber = Integer.parseInt(scanner.next());
+				
+				scanner.nextLine();
+
+				System.out.println("Enter the title of the book:");
+				String title = scanner.nextLine();
+
+				System.out.println("Enter the price:");
+				int price = Integer.parseInt(scanner.next());
+
+				System.out.println("Enter how many pages the book has:");
+				int pages = Integer.parseInt(scanner.next());
+				
+				scanner.nextLine();
+
+				System.out.println("Enter the publisher:");
+				String publisher = scanner.nextLine();
+
+				Book book = new Book(articleNumber, title, price, pages, publisher);
+				
+				mediaList.add(book);
+				
+				counter++;
+
+				System.out.println("The book: " + title + ", By: " + publisher + ", is now added.");
+			} else if (input.equals("m")) {
+
+				System.out.println("Enter the product ID:");
+				int articleNumber = Integer.parseInt(scanner.next());
+
+				scanner.nextLine();
+
+				System.out.println("Enter the title of the movie:");
+				String title = scanner.nextLine();
+
+				System.out.println("Enter the price:");
+				int price = Integer.parseInt(scanner.next());
+
+				System.out.println("Enter how long the movie is in minutes:");
+				int lengthMin = Integer.parseInt(scanner.next());
+
+				scanner.nextLine();
+
+				System.out.println("What is the imdb-rating of this movie?:");
+				float imdbRating = Float.parseFloat(scanner.next());
+				
+				
+				Movie movie = new Movie(articleNumber, title, price, lengthMin, imdbRating);
+				
+				mediaList.add(movie);
+				
+				counter++;
+
+				System.out.println("The movie: " + title + ", is now added.");
+
+			} else {
+				System.out.println(input + " is not a valid input");
+			}
+		}
+		catch(NumberFormatException e) {
+			System.out.println("Ogiltig inmatning. Försök igen.");
+			System.out.println(" ");
+			register();
+		}
+
 	}
 	
 	public static void deRegister(int articleNumber) {
@@ -137,7 +209,7 @@ public class Main {
 			
 			String[] arguments = parseArguments(userInput);
 			if(command == Command.LIST) {
-				
+				list();
 			}
 			else if(command == Command.CHECKOUT) {
 
@@ -147,7 +219,7 @@ public class Main {
 				
 			}
 			else if(command == Command.REGISTER) {
-				
+				register();
 				
 			}
 			else if(command == Command.DEREGISTER) {

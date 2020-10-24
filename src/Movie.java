@@ -9,5 +9,6 @@ public class Movie extends Media {
 		this.lengthMin = lengthMin;
 		this.imdbScore = imdbScore;
 	}
+	
 
 }
