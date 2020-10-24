@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
 	
-	HashMap<> 
+	
 	
 	public static void list() {
 		// Metod som skriver en lista på alla böcker i lagret(utlånade eller ej.
