@@ -2,6 +2,8 @@ import java.util.*;
 
 public class Main {
 	
+	HashMap<> 
+	
 	public static void list() {
 		// Metod som skriver en lista på alla böcker i lagret(utlånade eller ej.
 		// Om en produkt är utlånad ska kundens namn och telefonnummer visas.
@@ -12,7 +14,7 @@ public class Main {
 		// Inga argument
 	}
 	
-	public static void checkOut(int artikelNummer) {
+	public static void checkOut(int articleNumber) {
 	    //Metod för att låna ut en produkt till en kund. 
 		//Användaren ska kunna skriva ett telefonnummer och ett namn för kunden.
 		
@@ -34,7 +36,7 @@ public class Main {
 		//Argumentet tar emot artikelnummer som argument.
 	}
 	
-	public static void register(int artikelNummer) {
+	public static void register(int articleNumber) {
 		//Metod för att lägga till en ny produkt och registrera den i systemet
 		
 		//inga argument
@@ -56,7 +58,7 @@ public class Main {
 		//Såhär ska flödet i metoden se ut.
 	}
 	
-	public static void deRegister(int artikelNummer) {
+	public static void deRegister(int articleNumber) {
 		//Metod för att avregistrera en produkt.
 		
 		//Tar emot artikelnummer som argument
@@ -66,7 +68,7 @@ public class Main {
 		
 	}
 	
-	public static void info(int artikelNummer) {
+	public static void info(int articleNumber) {
 		//Skriver ut info om boken genom artikelnummer.
 		
 		//Tar emot artikelnummer som argument.
