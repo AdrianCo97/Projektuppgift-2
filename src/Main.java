@@ -6,6 +6,8 @@ public class Main {
 	
 	static ArrayList<Media> mediaList = new ArrayList<>();
 	
+	static HashMap<Integer, Customer> mediaAndCustomer = new HashMap<>();
+	
 	static int counter = 0;
 	
 	public static void list() {
@@ -61,6 +63,8 @@ public class Main {
 			for(int i = 0; i < mediaList.size(); i++) {
 				if(mediaList.get(i).articleNumber == articleNumber) {
 					System.out.println("Sucessfully lended " + mediaList.get(i).title + " to " + customer.getName());
+					
+					mediaAndCustomer.put(articleNumber, customer);
 				}
 			}
 		}
@@ -206,13 +210,13 @@ public class Main {
 		}
 	}
 	
-	public static int[] parseArguments(String userInput) {
+	public static int parseArguments(String userInput) {
 		String[] commandAndArguments = userInput.split(" ");
-		int[] arguments = new int[commandAndArguments.length - 1];
+		int argument = 0;
 		for(int i=1; i < commandAndArguments.length; i++) {
-			arguments[i-1] = Integer.parseInt(commandAndArguments[i]);
+			argument = Integer.parseInt(commandAndArguments[1]);
 		}
-		return arguments;
+		return argument;
 	}
 	
 	
@@ -230,16 +234,14 @@ public class Main {
 				continue;
 			}
 			
-			int[] arguments = parseArguments(userInput);
-			
-			int argument = arguments[0];
+			int argument = parseArguments(userInput);
 			
 			
 			if(command == Command.LIST) {
 				list();
 			}
 			else if(command == Command.CHECKOUT) {
-			checkOut(argument);
+			    checkOut(argument);
 
 			}
 			else if(command == Command.CHECKIN) {
@@ -251,10 +253,10 @@ public class Main {
 				
 			}
 			else if(command == Command.DEREGISTER) {
-				
+				deRegister(argument);
 			}
 			else if(command == Command.INFO) {
-				
+				info(argument);
 			}
 			else if(command == Command.QUIT) {
 				//Avsluta programmet.
