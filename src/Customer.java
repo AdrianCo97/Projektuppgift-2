@@ -7,5 +7,9 @@ public class Customer {
 		this.name = name;
 		this.cellphoneNumber = cellphoneNumber;
 	}
+	
+	public String getName() {
+		return name;
+	}
 
 }

@@ -2,6 +2,8 @@ import java.util.*;
 
 public class Main {
 	
+	static Scanner scanner = new Scanner(System.in);
+	
 	static ArrayList<Media> mediaList = new ArrayList<>();
 	
 	static int counter = 0;
@@ -41,6 +43,27 @@ public class Main {
 		//Successfully lended To Kill a Mockingbird to Alice Doe
 		
 		//Såhär ska metoden funka.
+		
+		
+		
+		System.out.println("Enter customer name: ");
+		String name = scanner.next();
+		
+		System.out.println("Enter customer phone number: ");
+		String phoneNumber = scanner.next();
+		
+		Customer customer = new Customer(name, phoneNumber);
+		
+		if(counter == 0) {
+			System.out.println("Det finns inga registrerade böcker i systemet.");
+		}
+		else {
+			for(int i = 0; i < mediaList.size(); i++) {
+				if(mediaList.get(i).articleNumber == articleNumber) {
+					System.out.println("Sucessfully lended " + mediaList.get(i).title + " to " + customer.getName());
+				}
+			}
+		}
 	}
 	
 	public static void checkIn() {
@@ -53,7 +76,7 @@ public class Main {
 		
 		 
 		
-		Scanner scanner = new Scanner(System.in);
+		
 		
 		System.out.println("What are you registering? Book(b) or a Movie(m)");
 		
@@ -183,11 +206,11 @@ public class Main {
 		}
 	}
 	
-	public static String[] parseArguments(String userInput) {
+	public static int[] parseArguments(String userInput) {
 		String[] commandAndArguments = userInput.split(" ");
-		String[] arguments = new String[commandAndArguments.length - 1];
+		int[] arguments = new int[commandAndArguments.length - 1];
 		for(int i=1; i < commandAndArguments.length; i++) {
-			arguments[i-1] = commandAndArguments[i];
+			arguments[i-1] = Integer.parseInt(commandAndArguments[i]);
 		}
 		return arguments;
 	}
@@ -207,15 +230,20 @@ public class Main {
 				continue;
 			}
 			
-			String[] arguments = parseArguments(userInput);
+			int[] arguments = parseArguments(userInput);
+			
+			int argument = arguments[0];
+			
+			
 			if(command == Command.LIST) {
 				list();
 			}
 			else if(command == Command.CHECKOUT) {
+			checkOut(argument);
 
 			}
 			else if(command == Command.CHECKIN) {
-				
+				checkIn();
 				
 			}
 			else if(command == Command.REGISTER) {
