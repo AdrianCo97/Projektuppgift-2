@@ -6,11 +6,13 @@ public class Main {
 	
 	static ArrayList<Media> mediaList = new ArrayList<>();
 	
-	static HashMap<Integer, Customer> mediaAndCustomer = new HashMap<>();
+	static HashMap<Integer, Customer> rentedMedia = new HashMap<>();
 	
 	static int counter = 0;
 	
 	public static void list() {
+		
+		int listCounter = 0;
 		
 		
 		// Metod som skriver en lista på alla böcker i lagret(utlånade eller ej.
@@ -21,14 +23,18 @@ public class Main {
 
 		// Inga argument
 		
-		if(counter == 0) {
-			System.out.println("There are no books or movies in stock.");
-		}
-		else {
-			for(Media m : mediaList) {
-				System.out.println(m.articleNumber + ", " + m.title);
+		if(counter > 0) {
+			for(int i = 0; i < mediaList.size(); i++) {
+				System.out.println(mediaList.get(i) + " (in stock)");
+			}
+			
+			for(Customer i : rentedMedia.values()) {
+				System.out.println(mediaList.get(counter) + " Borrowed by: " + i );
+				listCounter++;
 			}
 		}
+		
+		
 	}
 	
 	public static void checkOut(int articleNumber) {
@@ -49,22 +55,30 @@ public class Main {
 		
 		
 		System.out.println("Enter customer name: ");
-		String name = scanner.next();
 		
-		System.out.println("Enter customer phone number: ");
-		String phoneNumber = scanner.next();
+		scanner.nextLine();
+		
+		String name = scanner.nextLine();
+		
+		System.out.println("");
+		
+		System.out.println("Enter the customers phone number: ");
+		
+		String phoneNumber = scanner.nextLine();
 		
 		Customer customer = new Customer(name, phoneNumber);
 		
 		if(counter == 0) {
-			System.out.println("Det finns inga registrerade böcker i systemet.");
+			System.out.println("There are no registered books or movies in the library.");
 		}
 		else {
 			for(int i = 0; i < mediaList.size(); i++) {
 				if(mediaList.get(i).articleNumber == articleNumber) {
 					System.out.println("Sucessfully lended " + mediaList.get(i).title + " to " + customer.getName());
 					
-					mediaAndCustomer.put(articleNumber, customer);
+					rentedMedia.put(articleNumber, customer);
+					
+					mediaList.remove(i);
 				}
 			}
 		}
@@ -92,21 +106,31 @@ public class Main {
 				System.out.println("Enter the product ID:");
 				int articleNumber = Integer.parseInt(scanner.next());
 				
+				System.out.println("");
+				
 				scanner.nextLine();
 
 				System.out.println("Enter the title of the book:");
 				String title = scanner.nextLine();
+				
+				System.out.println("");
 
 				System.out.println("Enter the price:");
 				int price = Integer.parseInt(scanner.next());
+				
+				System.out.println("");
 
 				System.out.println("Enter how many pages the book has:");
 				int pages = Integer.parseInt(scanner.next());
 				
 				scanner.nextLine();
+				
+				System.out.println("");
 
 				System.out.println("Enter the publisher:");
 				String publisher = scanner.nextLine();
+				
+				System.out.println("");
 
 				Book book = new Book(articleNumber, title, price, pages, publisher);
 				
@@ -116,25 +140,35 @@ public class Main {
 
 				System.out.println("The book: " + title + ", By: " + publisher + ", is now added.");
 			} else if (input.equals("m")) {
+				
+				System.out.println("");
 
 				System.out.println("Enter the product ID:");
 				int articleNumber = Integer.parseInt(scanner.next());
+				
+				System.out.println("");
 
 				scanner.nextLine();
 
 				System.out.println("Enter the title of the movie:");
 				String title = scanner.nextLine();
+				
+				System.out.println("");
 
 				System.out.println("Enter the price:");
 				int price = Integer.parseInt(scanner.next());
+				
+				System.out.println("");
 
 				System.out.println("Enter how long the movie is in minutes:");
 				int lengthMin = Integer.parseInt(scanner.next());
-
-				scanner.nextLine();
+				
+				System.out.println("");
 
 				System.out.println("What is the imdb-rating of this movie?:");
 				float imdbRating = Float.parseFloat(scanner.next());
+				
+				System.out.println("");
 				
 				
 				Movie movie = new Movie(articleNumber, title, price, lengthMin, imdbRating);

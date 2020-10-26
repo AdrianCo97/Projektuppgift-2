@@ -11,18 +11,4 @@ public abstract class Media {
 		this.price = price;
 	}
 	
-	public int getArticleNumber() {
-		return this.articleNumber;
-	}
-	
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	
-	
-
 }

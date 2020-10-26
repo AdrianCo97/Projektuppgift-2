@@ -10,5 +10,13 @@ public class Movie extends Media {
 		this.imdbScore = imdbScore;
 	}
 	
+	@Override
+    public String toString() {
+		return articleNumber + " (Movie) " + title;
+	}
+	
+	public String getTitle() {
+		return this.title;
+	}
 
 }
