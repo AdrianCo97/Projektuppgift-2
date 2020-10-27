@@ -43,10 +43,15 @@ public class Main {
 				mainMenu();
 			}
 		}
+		
+		for(Media i : rentedMedia.keySet()) {
+			if(articleNumber == i.articleNumber) {
+				System.out.println(i + " Is already rented by " + rentedMedia.get(i));
+				mainMenu();
+			}
+		}
 	 
 		System.out.println("Enter customer name: ");
-		
-		scanner.nextLine();
 		
 		String name = scanner.nextLine();
 		
