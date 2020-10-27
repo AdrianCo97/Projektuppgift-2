@@ -59,7 +59,7 @@ public class Main {
 		}
 	}
 	
-	public static void checkIn() {
+	public static void checkIn(int articleNumber) {
 		//Ta tillbaka en utlånad produkt med artikelnummer.
 		
 		//Argumentet tar emot artikelnummer som argument.
@@ -89,12 +89,7 @@ public class Main {
 					articleNumber = Integer.parseInt(scanner.next());
 				}
 				
-				for(int i = 0; i < counter - 1; i++) {
-					if(articleNumber == mediaList.get(i).articleNumber) {
-						System.out.println("A book or movie with this ID already exists. Try again");
-						register();
-					}
-				}
+				
 				
 				
 				System.out.println("");
@@ -231,8 +226,6 @@ public class Main {
 		
 		//Tar emot artikelnummer som argument.
 		
-		//> deregister 12346
-		//Successfully deregistered The Great Gatsby
 		
 	}
 	
@@ -278,11 +271,17 @@ public class Main {
 		return argument;
 	}
 	
-	
-
-	public static void main(String[] args) {
-		
-		Scanner scanner = new Scanner(System.in);
+	public static void mainMenu() {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Welcome to the library program!");
+        
+        System.out.println("");
+        
+        System.out.println("- list = View all the registered books or movies \n- checkout + articlenumber = Loan a book or a movie to a customer.");
+        System.out.println("- checkin + articlenumber = Return a loaned book or movie to the library \n- register = Add a new book or movie to the library.");
+        System.out.println("- deregister + articlenumber = Remove a book or movie from the library \n- info + articlenumber = Writes out information about the book or movie.");
+        System.out.println("- quit = Exit the program");
 		
 		while(true) {
 			
@@ -304,7 +303,7 @@ public class Main {
 
 			}
 			else if(command == Command.CHECKIN) {
-				checkIn();
+				checkIn(argument);
 				
 			}
 			else if(command == Command.REGISTER) {
@@ -321,11 +320,14 @@ public class Main {
 				//Avsluta programmet.
 				
 			}
-			
+
 		}
-		
-		
-		
+
+	}
+
+	public static void main(String[] args) {
+		mainMenu();
+
 	}
 
 }
