@@ -66,7 +66,7 @@ public class Main {
 	}
 	
 	public static void register() { 
-		
+		boolean b = false;
 		 
 		System.out.println("");
 		
@@ -89,7 +89,12 @@ public class Main {
 					articleNumber = Integer.parseInt(scanner.next());
 				}
 				
-				
+				for(int i = 0; i < counter - 1; i++) {
+					if(articleNumber == mediaList.get(i).articleNumber) {
+						System.out.println("A book or movie with this ID already exists. Try again");
+						register();
+					}
+				}
 				
 				
 				System.out.println("");
@@ -125,42 +130,43 @@ public class Main {
 
 				Book book = new Book(articleNumber, title, price, pages, publisher);
 				
+				
 				if(counter == 0) {
 					mediaList.add(book);
-					System.out.println("The movie: " + title + ", is now added.");
+					System.out.println("The book: " + title + ", is now added.");
 					counter++;
 				}
 				else {
-					for(int i = 0; i < mediaList.size(); i++) {
-						if(book.articleNumber == mediaList.get(i).articleNumber) {
-							System.out.println("A book or movie with this ID already exists. Try again");
-							register();
-						}
-						else {
-							mediaList.add(book);
-							counter++;	
-							System.out.println("The Book: " + title + " was successfully added.");
-						}
-					}
+					
+					mediaList.add(book);
+					counter++;
+					System.out.println("The book: " + title + " was successfully added.");
+
 				}
 				
+						
 					
-
-				
 			} else if (input.equals("m")) {
-				
+
 				System.out.println("");
 
 				System.out.println("Enter the product ID:");
 				int articleNumber = Integer.parseInt(scanner.next());
-				
-				while(articleNumber < 10000 || articleNumber > 99999) {
+
+				while (articleNumber < 10000 || articleNumber > 99999) {
 					System.out.println("The product ID must be higher than 10000 and lower than 99999");
-					
+
 					articleNumber = Integer.parseInt(scanner.next());
-					
+
 				}
 				
+				for(int i = 0; i < counter - 1; i++) {
+					if(articleNumber == mediaList.get(i).articleNumber) {
+						System.out.println("A book or movie with this ID already exists. Try again");
+						register();
+					}
+				}
+
 				System.out.println("");
 
 				scanner.nextLine();
@@ -192,28 +198,10 @@ public class Main {
 				
 				Movie movie = new Movie(articleNumber, title, price, lengthMin, imdbRating);
 				
-				
-				if(counter == 0) {
-					mediaList.add(movie);
-					System.out.println("The movie: " + title + ", is now added.");
-					counter++;
-				}
-				else {
-					for(int i = 0; i < mediaList.size(); i++) {
-						if(movie.articleNumber == mediaList.get(i).articleNumber) {
-							System.out.println("A book or movie with this ID already exists. Try again");
-							register();
-						}
-						else {
-							mediaList.add(movie);
-							counter++;	
-							System.out.println("The Movie: " + title + " was successfully added.");
-						}
-					}
-				}
+				mediaList.add(movie);
+				counter++;
+				System.out.println("The Movie: " + title + " was successfully added.");
 					
-				
-
 				
 
 			} else {
