@@ -4,9 +4,9 @@ public class Main {
 	
 	static Scanner scanner = new Scanner(System.in);
 	
-	static ArrayList<Media> mediaList = new ArrayList<>();
+	static ArrayList<Media> mediaList = new ArrayList<>(); //Denna lista är till för att lagra böcker som är tillgängliga (in stock)
 	
-	static HashMap<Integer, Customer> rentedMedia = new HashMap<>();
+	static HashMap<Media, Customer> rentedMedia = new HashMap<>(); //Denna är till för att lagra böcker som är utlånade.
 	
 	static int counter = 0;
 	
@@ -28,9 +28,8 @@ public class Main {
 				System.out.println(mediaList.get(i) + " (in stock)");
 			}
 			
-			for(Customer i : rentedMedia.values()) {
-				System.out.println(mediaList.get(counter) + " Borrowed by: " + i );
-				listCounter++;
+			for(Media i : rentedMedia.keySet()) {
+				System.out.println(i + " is rented by: " + rentedMedia.get(i));
 			}
 		}
 		
@@ -76,7 +75,7 @@ public class Main {
 				if(mediaList.get(i).articleNumber == articleNumber) {
 					System.out.println("Sucessfully lended " + mediaList.get(i).title + " to " + customer.getName());
 					
-					rentedMedia.put(articleNumber, customer);
+					rentedMedia.put(mediaList.get(i), customer);
 					
 					mediaList.remove(i);
 				}
