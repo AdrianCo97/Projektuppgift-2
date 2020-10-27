@@ -28,6 +28,21 @@ public class Main {
 	}
 	
 	public static void checkOut(int articleNumber) {
+		
+		if(articleNumber == 0) {
+			System.out.println("You need to enter an argument for this function.");
+			
+			System.out.println("");
+			
+			mainMenu();
+		}
+		
+		for(int i = 0; i < mediaList.size(); i++) {
+			if(articleNumber != mediaList.get(i).articleNumber){
+				System.out.println("This product does not exist.");
+				mainMenu();
+			}
+		}
 	 
 		System.out.println("Enter customer name: ");
 		
@@ -279,14 +294,7 @@ public class Main {
 	public static void mainMenu() {
         Scanner scanner = new Scanner(System.in);
         
-        System.out.println("Welcome to the library program!");
         
-        System.out.println("");
-        
-        System.out.println("- list = View all the registered books or movies \n- checkout + articlenumber = Loan a book or a movie to a customer.");
-        System.out.println("- checkin + articlenumber = Return a loaned book or movie to the library \n- register = Add a new book or movie to the library.");
-        System.out.println("- deregister + articlenumber = Remove a book or movie from the library \n- info + articlenumber = Writes out information about the book or movie.");
-        System.out.println("- quit = Exit the program");
 		
 		while(true) {
 			
@@ -333,6 +341,16 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+		
+        System.out.println("Welcome to the library program!");
+        
+        System.out.println("");
+        
+        System.out.println("- list = View all the registered books or movies \n- checkout + articlenumber = Loan a book or a movie to a customer.");
+        System.out.println("- checkin + articlenumber = Return a loaned book or movie to the library \n- register = Add a new book or movie to the library.");
+        System.out.println("- deregister + articlenumber = Remove a book or movie from the library \n- info + articlenumber = Writes out information about the book or movie.");
+        System.out.println("- quit = Exit the program");
+        
 		mainMenu();
 
 	}
