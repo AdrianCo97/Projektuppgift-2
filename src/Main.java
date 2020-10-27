@@ -11,18 +11,7 @@ public class Main {
 	static int counter = 0;
 	
 	public static void list() {
-		
-		int listCounter = 0;
-		
-		
-		// Metod som skriver en lista på alla böcker i lagret(utlånade eller ej.
-		// Om en produkt är utlånad ska kundens namn och telefonnummer visas.
 
-		// t.ex 12345 (Book): To Kill a Mockingbird. Borrowed by: Alice Doe,
-		// 832-337-2959
-
-		// Inga argument
-		
 		if(counter > 0) {
 			for(int i = 0; i < mediaList.size(); i++) {
 				System.out.println(mediaList.get(i) + " (in stock)");
@@ -32,27 +21,14 @@ public class Main {
 				System.out.println(i + " is rented by: " + rentedMedia.get(i));
 			}
 		}
-		
+		else {
+			System.out.println("There are no books or movies registered.");
+		}
 		
 	}
 	
 	public static void checkOut(int articleNumber) {
-	    //Metod för att låna ut en produkt till en kund. 
-		//Användaren ska kunna skriva ett telefonnummer och ett namn för kunden.
-		
-		//Argumentet som metoden tar emot är bokens artikelnummer
-		
-		//> checkout 12345 
-		//Enter customer name:
-		//Alice Doe
-		//Enter customer phone number:
-		//832-337-2959
-		//Successfully lended To Kill a Mockingbird to Alice Doe
-		
-		//Såhär ska metoden funka.
-		
-		
-		
+	 
 		System.out.println("Enter customer name: ");
 		
 		scanner.nextLine();
@@ -91,33 +67,49 @@ public class Main {
 	
 	public static void register() { 
 		
+		boolean b = false;
+		
 		 
-		
-		
+		System.out.println("");
 		
 		System.out.println("What are you registering? Book(b) or a Movie(m)");
 		
 		String input = scanner.next();
 		
-		
 		try {
 			if (input.equals("b")) {
+				
+				
 				System.out.println("Enter the product ID:");
+				
+				
 				int articleNumber = Integer.parseInt(scanner.next());
+				
+				while(articleNumber < 10000 || articleNumber > 99999) {
+					System.out.println("The product ID must be higher than 10000 and lower than 99999");
+					
+					articleNumber = Integer.parseInt(scanner.next());
+				}
+				
+				
+				
 				
 				System.out.println("");
 				
 				scanner.nextLine();
+				
 
 				System.out.println("Enter the title of the book:");
 				String title = scanner.nextLine();
 				
 				System.out.println("");
+				
 
 				System.out.println("Enter the price:");
 				int price = Integer.parseInt(scanner.next());
 				
 				System.out.println("");
+				
 
 				System.out.println("Enter how many pages the book has:");
 				int pages = Integer.parseInt(scanner.next());
@@ -125,19 +117,38 @@ public class Main {
 				scanner.nextLine();
 				
 				System.out.println("");
+				
 
 				System.out.println("Enter the publisher:");
 				String publisher = scanner.nextLine();
 				
 				System.out.println("");
+				
 
 				Book book = new Book(articleNumber, title, price, pages, publisher);
 				
-				mediaList.add(book);
+				if(counter == 0) {
+					mediaList.add(book);
+					System.out.println("The movie: " + title + ", is now added.");
+					counter++;
+				}
+				else {
+					for(int i = 0; i < mediaList.size(); i++) {
+						if(book.articleNumber == mediaList.get(i).articleNumber) {
+							System.out.println("A book or movie with this ID already exists. Try again");
+							register();
+						}
+						else {
+							mediaList.add(book);
+							counter++;	
+							System.out.println("The Book: " + title + " was successfully added.");
+						}
+					}
+				}
 				
-				counter++;
+					
 
-				System.out.println("The book: " + title + ", By: " + publisher + ", is now added.");
+				
 			} else if (input.equals("m")) {
 				
 				System.out.println("");
@@ -145,24 +156,35 @@ public class Main {
 				System.out.println("Enter the product ID:");
 				int articleNumber = Integer.parseInt(scanner.next());
 				
+				while(articleNumber < 10000 || articleNumber > 99999) {
+					System.out.println("The product ID must be higher than 10000 and lower than 99999");
+					
+					articleNumber = Integer.parseInt(scanner.next());
+					
+				}
+				
 				System.out.println("");
 
 				scanner.nextLine();
+				
 
 				System.out.println("Enter the title of the movie:");
 				String title = scanner.nextLine();
 				
 				System.out.println("");
+				
 
 				System.out.println("Enter the price:");
 				int price = Integer.parseInt(scanner.next());
 				
 				System.out.println("");
+				
 
 				System.out.println("Enter how long the movie is in minutes:");
 				int lengthMin = Integer.parseInt(scanner.next());
 				
 				System.out.println("");
+				
 
 				System.out.println("What is the imdb-rating of this movie?:");
 				float imdbRating = Float.parseFloat(scanner.next());
@@ -172,18 +194,36 @@ public class Main {
 				
 				Movie movie = new Movie(articleNumber, title, price, lengthMin, imdbRating);
 				
-				mediaList.add(movie);
 				
-				counter++;
+				if(counter == 0) {
+					mediaList.add(movie);
+					System.out.println("The movie: " + title + ", is now added.");
+					counter++;
+				}
+				else {
+					for(int i = 0; i < mediaList.size(); i++) {
+						if(movie.articleNumber == mediaList.get(i).articleNumber) {
+							System.out.println("A book or movie with this ID already exists. Try again");
+							register();
+						}
+						else {
+							mediaList.add(movie);
+							counter++;	
+							System.out.println("The Movie: " + title + " was successfully added.");
+						}
+					}
+				}
+					
+				
 
-				System.out.println("The movie: " + title + ", is now added.");
+				
 
 			} else {
 				System.out.println(input + " is not a valid input");
 			}
 		}
 		catch(NumberFormatException e) {
-			System.out.println("Ogiltig inmatning. Försök igen.");
+			System.out.println("The input must be digits.");
 			System.out.println(" ");
 			register();
 		}
@@ -263,7 +303,7 @@ public class Main {
 			String userInput = scanner.nextLine();
 			Command command = parseCommand(userInput);
 			if(command == command.UNKNOWN) {
-				System.out.println("Ogiltigt kommando. Försök igen.");
+				System.out.println("Unknown command. Try again.");
 				continue;
 			}
 			
