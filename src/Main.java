@@ -67,8 +67,6 @@ public class Main {
 	
 	public static void register() { 
 		
-		boolean b = false;
-		
 		 
 		System.out.println("");
 		
