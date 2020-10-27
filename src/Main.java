@@ -89,8 +89,12 @@ public class Main {
 					articleNumber = Integer.parseInt(scanner.next());
 				}
 				
-				
-				
+				for(int i = 0; i < counter; i++) {
+					if(articleNumber == mediaList.get(i).articleNumber) {
+						System.out.println("A book or movie with this ID already exists. Try again");
+						register();
+					}
+				}
 				
 				System.out.println("");
 				
@@ -126,18 +130,16 @@ public class Main {
 				Book book = new Book(articleNumber, title, price, pages, publisher);
 				
 				
-				if(counter == 0) {
-					mediaList.add(book);
-					System.out.println("The book: " + title + ", is now added.");
-					counter++;
-				}
-				else {
-					
-					mediaList.add(book);
-					counter++;
-					System.out.println("The book: " + title + " was successfully added.");
+				
+				mediaList.add(book);
+				counter++;
+				System.out.println("The book: " + title + " was successfully added.");
+				
+				System.out.println("");
+				
+				mainMenu();
 
-				}
+				
 				
 						
 					
@@ -155,7 +157,7 @@ public class Main {
 
 				}
 				
-				for(int i = 0; i < counter - 1; i++) {
+				for(int i = 0; i < counter; i++) {
 					if(articleNumber == mediaList.get(i).articleNumber) {
 						System.out.println("A book or movie with this ID already exists. Try again");
 						register();
@@ -196,7 +198,10 @@ public class Main {
 				mediaList.add(movie);
 				counter++;
 				System.out.println("The Movie: " + title + " was successfully added.");
+				
+				System.out.println("");
 					
+				mainMenu();
 				
 
 			} else {
