@@ -299,6 +299,8 @@ public class Main {
 			
 			int argument = parseArguments(userInput);
 			
+			System.out.println("");
+			
 			
 			if(command == Command.LIST) {
 				list();
