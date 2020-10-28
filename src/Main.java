@@ -227,6 +227,11 @@ public class Main {
 
 		// > deregister 12346
 		// Successfully deregistered The Great Gatsby
+		if (articleNumber == 0) {
+			System.out.println("Invalid article ID, expecting 10000-99999. Please try again.");
+			System.out.println("");
+			mainMenu();
+		}
 
 		for (int i = 0; i < mediaList.size(); i++) {
 			if (mediaList.get(i).articleNumber == articleNumber) {
@@ -241,19 +246,17 @@ public class Main {
 		// Skriver ut info om boken genom artikelnummer.
 
 		// Tar emot artikelnummer som argument.
-
-		if (articleNumber > 10000 && articleNumber < 99999) {
-			for (int i = 0; i < mediaList.size(); i++) {
-				if (mediaList.get(i).articleNumber == articleNumber) {
-					System.out.println("ID: " + mediaList.get(i).articleNumber);
-					System.out.println("Title: " + mediaList.get(i).title);
-				}
-
-			}
-		} else {
-			System.out.println("Invalid article ID. Please try again");
+		if (articleNumber == 0) {
+			System.out.println("Invalid article ID, expecting 10000-99999. Please try again.");
+			System.out.println("");
+			mainMenu();
 		}
-
+		for (int i = 0; i < mediaList.size(); i++) {
+			if (mediaList.get(i).articleNumber == articleNumber) {
+				System.out.println("ID: " + mediaList.get(i).articleNumber);
+				System.out.println("Title: " + mediaList.get(i).title);
+			}
+		}
 	}
 
 	public static void info(String error) {
