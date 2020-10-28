@@ -20,6 +20,15 @@ public class Main {
 			System.out.println("");
 			mainMenu();
 		}
+		else if (articleNumber == 0) {
+
+			System.out.println("You need to enter an argument for this function.");
+
+			System.out.println("");
+
+			mainMenu();
+		}
+
 	}
 	
 	public static void checkArticleNumberMatch(int articleNumber) {
