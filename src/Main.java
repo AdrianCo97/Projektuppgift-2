@@ -289,6 +289,7 @@ public class Main {
 			if (mediaList.get(i).articleNumber == articleNumber) {
 				System.out.println("ID: " + mediaList.get(i).articleNumber);
 				System.out.println("Title: " + mediaList.get(i).title);
+				System.out.println("Price: " + mediaList.get(i).price);
 			}
 		}
 	}
