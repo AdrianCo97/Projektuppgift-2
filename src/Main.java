@@ -15,7 +15,7 @@ public class Main {
 	static int counter = 0;
 
 	public static void checkArticleNumber(int articleNumber) {
-		if (articleNumber < 10000) {
+		if (articleNumber < 10000 || articleNumber > 99999) {
 			System.out.println("Invalid article ID, expecting 10000-99999. Please try again.");
 			System.out.println("");
 			mainMenu();
