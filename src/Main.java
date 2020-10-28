@@ -370,12 +370,34 @@ public class Main {
 		}
 
 	}
+	
+	public static void csvReader() {
+		
+		Scanner scanner = new Scanner("Media.csv");
+		
+		int index = 0;
+		
+		while(scanner.hasNextLine()) {
+			String[] values = scanner.nextLine().split(", ");
+			
+			int articleNumber = Integer.parseInt(values[0]);
+			
+			String title = values[2];
+			
+			
+			
+			index++;
+		}
+		scanner.close();
+	}
 
 	public static void main(String[] args) {
 
 		System.out.println("Welcome to the library program!");
 
 		System.out.println("");
+		
+		
 
 		System.out.println("- list = View all the registered books or movies \n- checkout + articlenumber = Loan a book or a movie to a customer.");
 		System.out.println("- checkin + articlenumber = Return a loaned book or movie to the library \n- register = Add a new book or movie to the library.");
