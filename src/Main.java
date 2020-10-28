@@ -41,18 +41,6 @@ public class Main {
 			System.out.println("There are no books or movies registered.");
 		}
 
-//		if (counter > 0) {
-//			for (int i = 0; i < mediaList.size(); i++) {
-//				System.out.println(mediaList.get(i) + " (in stock)");
-//			}
-//
-//			for (Media i : rentedMedia.keySet()) {
-//				System.out.println(i + " is rented by: " + rentedMedia.get(i));
-//			}
-//		} else {
-//			System.out.println("There are no books or movies registered.");
-//		}
-
 	}
 
 	public static void checkOut(int articleNumber) {
@@ -144,11 +132,7 @@ public class Main {
 
 				int articleNumber = Integer.parseInt(scanner.next());
 
-				while (articleNumber < 10000 || articleNumber > 99999) {
-					System.out.println("The product ID must be higher than 10000 and lower than 99999");
-
-					articleNumber = Integer.parseInt(scanner.next());
-				}
+				checkArticleNumber(articleNumber);
 
 				for (int i = 0; i < counter; i++) {
 					if (articleNumber == mediaList.get(i).articleNumber) {
@@ -200,12 +184,7 @@ public class Main {
 				System.out.println("Enter the product ID:");
 				int articleNumber = Integer.parseInt(scanner.next());
 
-				while (articleNumber < 10000 || articleNumber > 99999) {
-					System.out.println("The product ID must be higher than 10000 and lower than 99999");
-
-					articleNumber = Integer.parseInt(scanner.next());
-
-				}
+				checkArticleNumber(articleNumber);
 
 				for (int i = 0; i < counter; i++) {
 					if (articleNumber == mediaList.get(i).articleNumber) {
