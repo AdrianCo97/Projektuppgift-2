@@ -14,11 +14,24 @@ public class Main {
 
 	static int counter = 0;
 
+	public static void checkArticleNumber(int articleNumber) {
+		if (articleNumber < 10000) {
+			System.out.println("Invalid article ID, expecting 10000-99999. Please try again.");
+			System.out.println("");
+			mainMenu();
+		}
+	}
+
 	public static void list() {
 
 		if (counter > 0) {
 			for (int i = 0; i < mediaList.size(); i++) {
-				System.out.println(mediaList.get(i) + " (in stock)");
+
+				if (mediaList.get(i).inStock) {
+					System.out.println(mediaList.get(i) + " (in stock)");
+
+				}
+
 			}
 
 			for (Media i : rentedMedia.keySet()) {
@@ -27,6 +40,18 @@ public class Main {
 		} else {
 			System.out.println("There are no books or movies registered.");
 		}
+
+//		if (counter > 0) {
+//			for (int i = 0; i < mediaList.size(); i++) {
+//				System.out.println(mediaList.get(i) + " (in stock)");
+//			}
+//
+//			for (Media i : rentedMedia.keySet()) {
+//				System.out.println(i + " is rented by: " + rentedMedia.get(i));
+//			}
+//		} else {
+//			System.out.println("There are no books or movies registered.");
+//		}
 
 	}
 
@@ -75,7 +100,8 @@ public class Main {
 
 					rentedMedia.put(mediaList.get(i), customer);
 
-					mediaList.remove(i);
+					mediaList.get(i).inStock = false;
+					// mediaList.remove(i);
 				}
 			}
 		}
@@ -85,6 +111,19 @@ public class Main {
 		// Ta tillbaka en utl�nad produkt med artikelnummer.
 
 		// Argumentet tar emot artikelnummer som argument.
+
+		checkArticleNumber(articleNumber);
+
+		for (int i = 0; i < mediaList.size(); i++) {
+			if (mediaList.get(i).articleNumber == articleNumber) {
+
+				// mediaList.add(articleNumber, mediaList.get(i));
+
+				rentedMedia.remove(mediaList.get(i));
+				mediaList.get(i).inStock = true;
+
+			}
+		}
 
 	}
 
@@ -227,11 +266,8 @@ public class Main {
 
 		// > deregister 12346
 		// Successfully deregistered The Great Gatsby
-		if (articleNumber == 0) {
-			System.out.println("Invalid article ID, expecting 10000-99999. Please try again.");
-			System.out.println("");
-			mainMenu();
-		}
+
+		checkArticleNumber(articleNumber);
 
 		for (int i = 0; i < mediaList.size(); i++) {
 			if (mediaList.get(i).articleNumber == articleNumber) {
@@ -246,11 +282,9 @@ public class Main {
 		// Skriver ut info om boken genom artikelnummer.
 
 		// Tar emot artikelnummer som argument.
-		if (articleNumber == 0) {
-			System.out.println("Invalid article ID, expecting 10000-99999. Please try again.");
-			System.out.println("");
-			mainMenu();
-		}
+
+		checkArticleNumber(articleNumber);
+
 		for (int i = 0; i < mediaList.size(); i++) {
 			if (mediaList.get(i).articleNumber == articleNumber) {
 				System.out.println("ID: " + mediaList.get(i).articleNumber);
@@ -259,11 +293,11 @@ public class Main {
 		}
 	}
 
-	public static void info(String error) {
-		// metod för att fånga om agrumentet är String
-
-		System.out.print(error + " is not a valid id. Should be between 10000-99999");
-	}
+//	public static void info(String error) {
+//		// metod för att fånga om agrumentet är String
+//
+//		System.out.print(error + " is not a valid id. Should be between 10000-99999");
+//	}
 
 	enum Command {
 		LIST, CHECKOUT, CHECKIN, REGISTER, DEREGISTER, INFO, QUIT, UNKNOWN
