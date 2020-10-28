@@ -65,7 +65,7 @@ public class Main {
 		}
 		
 		if(match == false) {
-			System.out.println("There are no registered products with this ID");
+			System.out.println("There are no registered products with this ID.");
 			
 			System.out.println("");
 			
