@@ -21,6 +21,27 @@ public class Main {
 			mainMenu();
 		}
 	}
+	
+	public static void checkArticleNumberMatch(int articleNumber) {
+		
+		boolean match = false;
+		
+		for(int i = 0; i < mediaList.size(); i++){
+			if(articleNumber == mediaList.get(i).articleNumber) {
+				match = true;
+				break;
+			}
+		}
+		
+		if(match == false) {
+			System.out.println("There are no registered products with this ID.");
+			
+			System.out.println("");
+			
+			mainMenu();
+		}
+		
+	}
 
 	public static void list() {
 
@@ -45,10 +66,7 @@ public class Main {
 
 	public static void checkOut(int articleNumber) {
 		
-		boolean match = false;
 		
-		checkArticleNumber(articleNumber);
-
 		if (articleNumber == 0) {
 			System.out.println("You need to enter an argument for this function.");
 
@@ -57,20 +75,9 @@ public class Main {
 			mainMenu();
 		}
 		
-		for(int i = 0; i < mediaList.size(); i++){
-			if(articleNumber == mediaList.get(i).articleNumber) {
-				match = true;
-				break;
-			}
-		}
+		checkArticleNumber(articleNumber);
 		
-		if(match == false) {
-			System.out.println("There are no registered products with this ID.");
-			
-			System.out.println("");
-			
-			mainMenu();
-		}
+		checkArticleNumberMatch(articleNumber);
 		
 		
 		for (Media i : rentedMedia.keySet()) {
@@ -79,6 +86,8 @@ public class Main {
 				mainMenu();
 			}
 		}
+		
+		scanner.nextLine();
 
 		System.out.println("Enter customer name: ");
 
