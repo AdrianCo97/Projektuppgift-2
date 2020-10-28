@@ -20,15 +20,6 @@ public class Main {
 			System.out.println("");
 			mainMenu();
 		}
-		else if (articleNumber == 0) {
-
-			System.out.println("You need to enter an argument for this function.");
-
-			System.out.println("");
-
-			mainMenu();
-		}
-
 	}
 	
 	public static void checkArticleNumberMatch(int articleNumber) {
@@ -74,15 +65,6 @@ public class Main {
 	}
 
 	public static void checkOut(int articleNumber) {
-		
-		
-		if (articleNumber == 0) {
-			System.out.println("You need to enter an argument for this function.");
-
-			System.out.println("");
-
-			mainMenu();
-		}
 		
 		checkArticleNumber(articleNumber);
 		
@@ -278,6 +260,8 @@ public class Main {
 		// Successfully deregistered The Great Gatsby
 
 		checkArticleNumber(articleNumber);
+		
+		checkArticleNumberMatch(articleNumber);
 
 		for (int i = 0; i < mediaList.size(); i++) {
 			if (mediaList.get(i).articleNumber == articleNumber) {
@@ -294,6 +278,8 @@ public class Main {
 		// Tar emot artikelnummer som argument.
 
 		checkArticleNumber(articleNumber);
+		
+		checkArticleNumberMatch(articleNumber);
 
 		for (int i = 0; i < mediaList.size(); i++) {
 			if (mediaList.get(i).articleNumber == articleNumber) {
