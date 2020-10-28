@@ -44,6 +44,7 @@ public class Main {
 	}
 
 	public static void checkOut(int articleNumber) {
+		
 
 		if (articleNumber == 0) {
 			System.out.println("You need to enter an argument for this function.");
@@ -52,20 +53,28 @@ public class Main {
 
 			mainMenu();
 		}
-
-		for (int i = 0; i < mediaList.size(); i++) {
-			if (articleNumber != mediaList.get(i).articleNumber) {
-				System.out.println("This product does not exist.");
+		
+		for(int i = 0; i < mediaList.size(); i++){
+			if(articleNumber == mediaList.get(i).articleNumber) {
+				break;
+			}
+			else if(i == counter && articleNumber != mediaList.get(i).articleNumber) {
+				System.out.println("There are no products with thid ID.");
+				
+				System.out.println("");
+				
 				mainMenu();
 			}
 		}
-
+		
 		for (Media i : rentedMedia.keySet()) {
 			if (articleNumber == i.articleNumber) {
 				System.out.println(i + " Is already rented by " + rentedMedia.get(i));
 				mainMenu();
 			}
 		}
+		
+		scanner.nextLine();
 
 		System.out.println("Enter customer name: ");
 
@@ -89,7 +98,7 @@ public class Main {
 					rentedMedia.put(mediaList.get(i), customer);
 
 					mediaList.get(i).inStock = false;
-					// mediaList.remove(i);
+					
 				}
 			}
 		}
