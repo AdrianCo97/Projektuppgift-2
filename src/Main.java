@@ -48,12 +48,12 @@ public class Main {
 		
 		try {
 			
-			BufferedReader bF = new BufferedReader(new FileReader("F:\\Eclipse\\Projektuppgift-2\\books.txt"));
+			BufferedReader bufferedBookReader = new BufferedReader(new FileReader("books.txt"));
 
-			String value;
+			String bookStr;
 
-			while ((value = bF.readLine()) != null) {
-				String[] values = value.split(", ");
+			while ((bookStr = bufferedBookReader.readLine()) != null) {
+				String[] values = bookStr.split(", ");
 
 				int articleNumber = Integer.parseInt(values[0]);
 
@@ -70,19 +70,13 @@ public class Main {
 				mediaList.add(book);
 				
 			}
-			bF.close();
-		}
-		catch(IOException e) {
-			System.out.println(e.getMessage());
-		}
-		
-		try {
 			
-			BufferedReader bF = new BufferedReader(new FileReader("F:\\Eclipse\\Projektuppgift-2\\movies.txt"));
-			String value;
+			
+			BufferedReader bufferedMovieReader = new BufferedReader(new FileReader("movies.txt"));
+			String movieStr;
 
-			while ((value = bF.readLine()) != null) {
-				String[] values = value.split(", ");
+			while ((movieStr = bufferedMovieReader.readLine()) != null) {
+				String[] values = movieStr.split(", ");
 
 				int articleNumber = Integer.parseInt(values[0]);
 
@@ -99,10 +93,11 @@ public class Main {
 				mediaList.add(movie);
 				
 			}
-			bF.close();
-			
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			bufferedBookReader.close();
+			bufferedMovieReader.close();
+		}
+		catch(IOException e) {
+			System.out.println("The program couldn't find the file or files.");
 		}
 
 	}
@@ -142,7 +137,6 @@ public class Main {
 			}
 		}
 		
-		scanner.nextLine();
 
 		System.out.println("Enter customer name: ");
 
@@ -157,7 +151,7 @@ public class Main {
 		Customer customer = new Customer(name, phoneNumber);
 
 		if (mediaList.size() == 0) {
-			System.out.println("There are no registered books or movies in the library.");
+			System.out.println("There are no books or movies in stock.");
 		} else {
 			for (int i = 0; i < mediaList.size(); i++) {
 				if (mediaList.get(i).articleNumber == articleNumber) {
@@ -441,6 +435,8 @@ public class Main {
 		System.out.println("- checkin + articlenumber = Return a loaned book or movie to the library \n- register = Add a new book or movie to the library.");
 		System.out.println("- deregister + articlenumber = Remove a book or movie from the library \n- info + articlenumber = Writes out information about the book or movie.");
 		System.out.println("- quit = Exit the program");
+		
+		System.out.println(System.getProperty("user.dir"));
 		
 		readFiles();
 
