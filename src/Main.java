@@ -217,8 +217,6 @@ public class Main {
 
 	public static void register() {
 
-		System.out.println("");
-
 		System.out.println("What are you registering? Book(b) or a Movie(m)");
 
 		String input = scanner.next();
