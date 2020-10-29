@@ -355,9 +355,8 @@ public class Main {
 
 		for (int i = 0; i < mediaList.size(); i++) {
 			if (mediaList.get(i).articleNumber == articleNumber) {
-				mediaList.remove(i);
-				
 				System.out.println("Successfully deregistered " + mediaList.get(i).title);
+				mediaList.remove(i);
 			}
 
 		}
