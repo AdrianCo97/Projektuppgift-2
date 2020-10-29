@@ -49,6 +49,7 @@ public class Main {
 	public static void readFiles() {
 		
 		try {
+			
 			BufferedReader bF = new BufferedReader(new FileReader("F:\\Eclipse\\Projektuppgift-2\\books.txt"));
 
 			String value;
@@ -76,35 +77,34 @@ public class Main {
 			System.out.println(e.getMessage());
 		}
 		
-		try(BufferedReader bF = new BufferedReader(new FileReader("F:\\Eclipse\\Projektuppgift-2\\movies.txt"))){
-			String value;
+		try {
 			
-			while((value = bF.readLine()) != null) {
+			BufferedReader bF = new BufferedReader(new FileReader("F:\\Eclipse\\Projektuppgift-2\\movies.txt"));
+			String value;
+
+			while ((value = bF.readLine()) != null) {
 				String[] values = value.split(", ");
-				
+
 				int articleNumber = Integer.parseInt(values[0]);
-				
+
 				String title = values[1];
-				
+
 				int price = Integer.parseInt(values[2]);
-				
+
 				int length = Integer.parseInt(values[3]);
-				
+
 				float rating = Float.parseFloat(values[4]);
-				
+
 				Movie movie = new Movie(articleNumber, title, price, length, rating);
-				
+
 				mediaList.add(movie);
 			}
 			bF.close();
-		}
-		catch(IOException e) {
+			
+		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-        
-        
-        
-		
+
 	}
 
 	public static void list() {
