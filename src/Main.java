@@ -106,9 +106,10 @@ public class Main {
 			FileWriter fileWriter = new FileWriter("books.txt", true);
 			BufferedWriter bW = new BufferedWriter(fileWriter);
 			PrintWriter writer = new PrintWriter(bW);
-
-			writer.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", " + book.publisher);
+			
 			bW.newLine();
+			writer.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", " + book.publisher);
+			
 			writer.close();
 		} catch (IOException e) {
 			System.out.println("The program couldn't find the file or files.");
@@ -124,9 +125,9 @@ public class Main {
 			BufferedWriter bW = new BufferedWriter(fileWriter);
 			PrintWriter writer = new PrintWriter(bW);
 			
-
-			writer.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", " + movie.imdbScore);
 			bW.newLine();
+			writer.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", " + movie.imdbScore);
+			
 			writer.close();
 			
 		} catch (IOException e) {
