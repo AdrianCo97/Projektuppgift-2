@@ -102,12 +102,13 @@ public class Main {
 	public static void writeToBookFile(Book book) {
 
 		try {
+			
 			FileWriter fileWriter = new FileWriter("books.txt", true);
 			BufferedWriter bW = new BufferedWriter(fileWriter);
 			PrintWriter writer = new PrintWriter(bW);
-			
+
 			writer.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", " + book.publisher);
-			
+			bW.newLine();
 			writer.close();
 		} catch (IOException e) {
 			System.out.println("The program couldn't find the file or files.");
@@ -118,12 +119,14 @@ public class Main {
 	public static void writeToMovieFile(Movie movie) {
 
 		try {
+			
 			FileWriter fileWriter = new FileWriter("movies.txt", true);
 			BufferedWriter bW = new BufferedWriter(fileWriter);
 			PrintWriter writer = new PrintWriter(bW);
 			
+
 			writer.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", " + movie.imdbScore);
-			
+			bW.newLine();
 			writer.close();
 			
 		} catch (IOException e) {
@@ -156,7 +159,7 @@ public class Main {
 	}
 
 	public static void checkOut(int articleNumber) {
-
+		
 		checkArticleNumber(articleNumber);
 
 		checkArticleNumberMatch(articleNumber);
