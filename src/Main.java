@@ -443,14 +443,26 @@ public class Main {
 			System.out.println("");
 
 			System.out.println("> " + userInput);
+			
+			System.out.println("");
 
 			Command command = parseCommand(userInput);
 			if (command == command.UNKNOWN) {
 				System.out.println("Unknown command. Try again.");
 				continue;
 			}
+			
+			int argument = 0;
+			try {
+				argument = parseArguments(userInput);
+			}
+			catch(NumberFormatException e) {
+				
+				
+				System.out.println("You can only use digits with Commands.");
 
-			int argument = parseArguments(userInput);
+				mainMenu();
+			}
 
 			System.out.println("");
 
