@@ -100,19 +100,18 @@ public class Main {
 	}
 
 	public static void writeToBookFile(Book book) {
+		
+		
 
 		try {
 			
-			FileWriter fileWriter = new FileWriter("books.txt", true);
-			BufferedWriter bW = new BufferedWriter(fileWriter);
-			PrintWriter writer = new PrintWriter(bW);
+			FileWriter fW = new FileWriter("books.txt", true);
+			PrintWriter writer = new PrintWriter(fW);
+
+			writer.print("\n" + book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", " + book.publisher);
 			
-			bW.newLine();
-			writer.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", " + book.publisher);
-			
-			fileWriter.close();
-			bW.close();
 			writer.close();
+			
 		} catch (IOException e) {
 			System.out.println("The program couldn't find the file or files.");
 		} 
@@ -123,15 +122,11 @@ public class Main {
 
 		try {
 			
-			FileWriter fileWriter = new FileWriter("movies.txt", true);
-			BufferedWriter bW = new BufferedWriter(fileWriter);
-			PrintWriter writer = new PrintWriter(bW);
-			
-			bW.newLine();
-			writer.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", " + movie.imdbScore);
-			
-			fileWriter.close();
-			bW.close();
+			FileWriter fW = new FileWriter("movies.txt", true);
+			PrintWriter writer = new PrintWriter(fW);
+		
+			writer.print("\n" + movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", " + movie.imdbScore);
+		
 			writer.close();
 			
 		} catch (IOException e) {
