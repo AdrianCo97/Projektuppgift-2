@@ -1,4 +1,9 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -20,34 +25,32 @@ public class Main {
 			mainMenu();
 		}
 	}
-	
+
 	public static void checkArticleNumberMatch(int articleNumber) {
-		
+
 		boolean match = false;
-		
-		for(int i = 0; i < mediaList.size(); i++){
-			if(articleNumber == mediaList.get(i).articleNumber) {
+
+		for (int i = 0; i < mediaList.size(); i++) {
+			if (articleNumber == mediaList.get(i).articleNumber) {
 				match = true;
 				break;
 			}
 		}
-		
-		if(match == false) {
+
+		if (match == false) {
 			System.out.println("There are no registered products with this ID.");
-			
+
 			System.out.println("");
-			
+
 			mainMenu();
 		}
-		
+
 	}
-	
-	
-	
+
 	public static void readFiles() {
-		
+
 		try {
-			
+
 			BufferedReader bufferedBookReader = new BufferedReader(new FileReader("books.txt"));
 
 			String bookStr;
@@ -68,10 +71,9 @@ public class Main {
 				Book book = new Book(articleNumber, title, price, pages, publisher);
 
 				mediaList.add(book);
-				
+
 			}
-			
-			
+
 			BufferedReader bufferedMovieReader = new BufferedReader(new FileReader("movies.txt"));
 			String movieStr;
 
@@ -91,47 +93,46 @@ public class Main {
 				Movie movie = new Movie(articleNumber, title, price, length, rating);
 
 				mediaList.add(movie);
-				
+
 			}
 			bufferedBookReader.close();
 			bufferedMovieReader.close();
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
 			System.out.println("The program couldn't find the file or files.");
 		}
 
 	}
 
 	public static void writeToBookFile(Book book) {
-		
+
 		try {
 			FileWriter fW = new FileWriter("books.txt");
 			BufferedWriter bF = new BufferedWriter(fW);
 			PrintWriter pW = new PrintWriter(bF);
-			
-			pW.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", " + book.publisher);
-		}
-		catch(IOException e) {
+
+			pW.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", "
+					+ book.publisher);
+		} catch (IOException e) {
 			System.out.println("The program couldn't find the file or files.");
 		}
-		
+
 	}
-	
-    public static void writeToMovieFile(Movie movie) {
-		
+
+	public static void writeToMovieFile(Movie movie) {
+
 		try {
 			FileWriter fW = new FileWriter("books.txt");
 			BufferedWriter bF = new BufferedWriter(fW);
 			PrintWriter pW = new PrintWriter(bF);
-			
-			pW.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", " + movie.imdbScore);
-		}
-		catch(IOException e) {
+
+			pW.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", "
+					+ movie.imdbScore);
+		} catch (IOException e) {
 			System.out.println("The program couldn't find the file or files.");
 		}
-		
+
 	}
-	
+
 	public static void list() {
 
 		if (mediaList.size() > 0) {
@@ -154,19 +155,17 @@ public class Main {
 	}
 
 	public static void checkOut(int articleNumber) {
-		
+
 		checkArticleNumber(articleNumber);
-		
+
 		checkArticleNumberMatch(articleNumber);
-		
-		
+
 		for (Media i : rentedMedia.keySet()) {
 			if (articleNumber == i.articleNumber) {
 				System.out.println(i + " Is already rented by " + rentedMedia.get(i));
 				mainMenu();
 			}
 		}
-		
 
 		System.out.println("Enter customer name: ");
 
@@ -190,7 +189,7 @@ public class Main {
 					rentedMedia.put(mediaList.get(i), customer);
 
 					mediaList.get(i).inStock = false;
-					
+
 				}
 			}
 		}
@@ -269,9 +268,9 @@ public class Main {
 				Book book = new Book(articleNumber, title, price, pages, publisher);
 
 				mediaList.add(book);
-				
+
 				writeToBookFile(book);
-				
+
 				System.out.println("The book: " + title + " was successfully added.");
 
 				System.out.println("");
@@ -321,9 +320,9 @@ public class Main {
 				Movie movie = new Movie(articleNumber, title, price, lengthMin, imdbRating);
 
 				mediaList.add(movie);
-				
+
 				writeToMovieFile(movie);
-				
+
 				System.out.println("The Movie: " + title + " was successfully added.");
 
 				System.out.println("");
@@ -350,7 +349,7 @@ public class Main {
 		// Successfully deregistered The Great Gatsby
 
 		checkArticleNumber(articleNumber);
-		
+
 		checkArticleNumberMatch(articleNumber);
 
 		for (int i = 0; i < mediaList.size(); i++) {
@@ -368,15 +367,28 @@ public class Main {
 
 		// Tar emot artikelnummer som argument.
 
-		checkArticleNumber(articleNumber);
-		
-		checkArticleNumberMatch(articleNumber);
-
 		for (int i = 0; i < mediaList.size(); i++) {
-			if (mediaList.get(i).articleNumber == articleNumber) {
-				System.out.println("ID: " + mediaList.get(i).articleNumber);
-				System.out.println("Title: " + mediaList.get(i).title);
-				System.out.println("Price: " + mediaList.get(i).price);
+
+			if (mediaList.get(i) instanceof Book) {
+				Book b = (Book) mediaList.get(i);
+				if (mediaList.get(i).articleNumber == articleNumber) {
+					System.out.println("ID: " + mediaList.get(i).articleNumber);
+					System.out.println("Title: " + mediaList.get(i).title);
+					System.out.println("Price: " + mediaList.get(i).price + " kr");
+					System.out.println("Pages: " + b.pages);
+					System.out.println("Publisher: " + b.publisher);
+				}
+			}
+
+			if (mediaList.get(i) instanceof Movie) {
+				Movie m = (Movie) mediaList.get(i);
+				if (mediaList.get(i).articleNumber == articleNumber) {
+					System.out.println("ID: " + mediaList.get(i).articleNumber);
+					System.out.println("Title: " + mediaList.get(i).title);
+					System.out.println("Price: " + mediaList.get(i).price + " kr");
+					System.out.println("Length: " + m.lengthMin + " min");
+					System.out.println("IMDB rating: " + m.imdbScore);
+				}
 			}
 		}
 	}
@@ -420,18 +432,17 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 
 		while (true) {
-			
+
 			System.out.println("");
-			
+
 			System.out.println("Write your input:");
 
 			String userInput = scanner.nextLine();
-			
+
 			System.out.println("");
-			
+
 			System.out.println("> " + userInput);
-			
-			
+
 			Command command = parseCommand(userInput);
 			if (command == command.UNKNOWN) {
 				System.out.println("Unknown command. Try again.");
@@ -467,20 +478,21 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		
+
 		System.out.println("Welcome to the library program!");
 
 		System.out.println("");
-		
-		
 
-		System.out.println("- list = View all the registered books or movies \n- checkout + articlenumber = Loan a book or a movie to a customer.");
-		System.out.println("- checkin + articlenumber = Return a loaned book or movie to the library \n- register = Add a new book or movie to the library.");
-		System.out.println("- deregister + articlenumber = Remove a book or movie from the library \n- info + articlenumber = Writes out information about the book or movie.");
+		System.out.println(
+				"- list = View all the registered books or movies \n- checkout + articlenumber = Loan a book or a movie to a customer.");
+		System.out.println(
+				"- checkin + articlenumber = Return a loaned book or movie to the library \n- register = Add a new book or movie to the library.");
+		System.out.println(
+				"- deregister + articlenumber = Remove a book or movie from the library \n- info + articlenumber = Writes out information about the book or movie.");
 		System.out.println("- quit = Exit the program");
-		
+
 		System.out.println("");
-		
+
 		readFiles();
 
 		mainMenu();
