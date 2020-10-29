@@ -110,6 +110,8 @@ public class Main {
 			bW.newLine();
 			writer.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", " + book.publisher);
 			
+			fileWriter.close();
+			bW.close();
 			writer.close();
 		} catch (IOException e) {
 			System.out.println("The program couldn't find the file or files.");
@@ -128,6 +130,8 @@ public class Main {
 			bW.newLine();
 			writer.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", " + movie.imdbScore);
 			
+			fileWriter.close();
+			bW.close();
 			writer.close();
 			
 		} catch (IOException e) {
