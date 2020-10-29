@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -40,6 +41,69 @@ public class Main {
 			
 			mainMenu();
 		}
+		
+	}
+	
+	
+	
+	public static void readFiles() {
+		
+		try {
+			BufferedReader bF = new BufferedReader(new FileReader("F:\\Eclipse\\Projektuppgift-2\\books.txt"));
+
+			String value;
+
+			while ((value = bF.readLine()) != null) {
+				String[] values = value.split(", ");
+
+				int articleNumber = Integer.parseInt(values[0]);
+
+				String title = values[1];
+
+				int price = Integer.parseInt(values[2]);
+
+				int pages = Integer.parseInt(values[3]);
+
+				String publisher = values[4];
+
+				Book book = new Book(articleNumber, title, price, pages, publisher);
+
+				mediaList.add(book);
+			}
+			bF.close();
+		}
+		catch(IOException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		try(BufferedReader bF = new BufferedReader(new FileReader("F:\\Eclipse\\Projektuppgift-2\\movies.txt"))){
+			String value;
+			
+			while((value = bF.readLine()) != null) {
+				String[] values = value.split(", ");
+				
+				int articleNumber = Integer.parseInt(values[0]);
+				
+				String title = values[1];
+				
+				int price = Integer.parseInt(values[2]);
+				
+				int length = Integer.parseInt(values[3]);
+				
+				float rating = Float.parseFloat(values[4]);
+				
+				Movie movie = new Movie(articleNumber, title, price, length, rating);
+				
+				mediaList.add(movie);
+			}
+			bF.close();
+		}
+		catch(IOException e) {
+			System.out.println(e.getMessage());
+		}
+        
+        
+        
 		
 	}
 
@@ -290,12 +354,6 @@ public class Main {
 		}
 	}
 
-//	public static void info(String error) {
-//		// metod för att fånga om agrumentet är String
-//
-//		System.out.print(error + " is not a valid id. Should be between 10000-99999");
-//	}
-
 	enum Command {
 		LIST, CHECKOUT, CHECKIN, REGISTER, DEREGISTER, INFO, QUIT, UNKNOWN
 	}
@@ -370,29 +428,9 @@ public class Main {
 		}
 
 	}
-	
-	public static void csvReader() {
-		
-		Scanner scanner = new Scanner("Media.csv");
-		
-		int index = 0;
-		
-		while(scanner.hasNextLine()) {
-			String[] values = scanner.nextLine().split(", ");
-			
-			int articleNumber = Integer.parseInt(values[0]);
-			
-			String title = values[2];
-			
-			
-			
-			index++;
-		}
-		scanner.close();
-	}
 
 	public static void main(String[] args) {
-
+		
 		System.out.println("Welcome to the library program!");
 
 		System.out.println("");
@@ -403,6 +441,8 @@ public class Main {
 		System.out.println("- checkin + articlenumber = Return a loaned book or movie to the library \n- register = Add a new book or movie to the library.");
 		System.out.println("- deregister + articlenumber = Remove a book or movie from the library \n- info + articlenumber = Writes out information about the book or movie.");
 		System.out.println("- quit = Exit the program");
+		
+		readFiles();
 
 		mainMenu();
 
