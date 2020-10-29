@@ -13,8 +13,6 @@ public class Main {
 	static HashMap<Media, Customer> rentedMedia = new HashMap<>(); // Denna �r till f�r att lagra b�cker som �r
 																	// utl�nade.
 
-	static int counter = 0;
-
 	public static void checkArticleNumber(int articleNumber) {
 		if (articleNumber < 10000 || articleNumber > 99999) {
 			System.out.println("Invalid article ID, expecting 10000-99999. Please try again.");
@@ -70,6 +68,7 @@ public class Main {
 				Book book = new Book(articleNumber, title, price, pages, publisher);
 
 				mediaList.add(book);
+				
 			}
 			bF.close();
 		}
@@ -98,6 +97,7 @@ public class Main {
 				Movie movie = new Movie(articleNumber, title, price, length, rating);
 
 				mediaList.add(movie);
+				
 			}
 			bF.close();
 			
@@ -109,7 +109,7 @@ public class Main {
 
 	public static void list() {
 
-		if (counter > 0) {
+		if (mediaList.size() > 0) {
 			for (int i = 0; i < mediaList.size(); i++) {
 
 				if (mediaList.get(i).inStock) {
@@ -156,7 +156,7 @@ public class Main {
 
 		Customer customer = new Customer(name, phoneNumber);
 
-		if (counter == 0) {
+		if (mediaList.size() == 0) {
 			System.out.println("There are no registered books or movies in the library.");
 		} else {
 			for (int i = 0; i < mediaList.size(); i++) {
@@ -211,7 +211,7 @@ public class Main {
 
 				checkArticleNumber(articleNumber);
 
-				for (int i = 0; i < counter; i++) {
+				for (int i = 0; i < mediaList.size(); i++) {
 					if (articleNumber == mediaList.get(i).articleNumber) {
 						System.out.println("A book or movie with this ID already exists. Try again");
 						register();
@@ -247,7 +247,7 @@ public class Main {
 				Book book = new Book(articleNumber, title, price, pages, publisher);
 
 				mediaList.add(book);
-				counter++;
+				
 				System.out.println("The book: " + title + " was successfully added.");
 
 				System.out.println("");
@@ -263,7 +263,7 @@ public class Main {
 
 				checkArticleNumber(articleNumber);
 
-				for (int i = 0; i < counter; i++) {
+				for (int i = 0; i < mediaList.size(); i++) {
 					if (articleNumber == mediaList.get(i).articleNumber) {
 						System.out.println("A book or movie with this ID already exists. Try again");
 						register();
@@ -297,7 +297,7 @@ public class Main {
 				Movie movie = new Movie(articleNumber, title, price, lengthMin, imdbRating);
 
 				mediaList.add(movie);
-				counter++;
+				
 				System.out.println("The Movie: " + title + " was successfully added.");
 
 				System.out.println("");
