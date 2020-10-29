@@ -1,3 +1,0 @@
-13425, Harry Potter, 100, 223, J.K Rowling
-12414, Tintin, 39, 60, Hergé
-13973, Game of Thrones, 245, 694, J.K Rowling
