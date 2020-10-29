@@ -363,9 +363,10 @@ public class Main {
 	}
 
 	public static void info(int articleNumber) {
-		// Skriver ut info om boken genom artikelnummer.
-
-		// Tar emot artikelnummer som argument.
+		
+		checkArticleNumber(articleNumber);
+		
+		checkArticleNumberMatch(articleNumber);
 
 		for (int i = 0; i < mediaList.size(); i++) {
 
