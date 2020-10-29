@@ -1,8 +1,8 @@
 
 public class Book extends Media {
 	
-	private int pages;
-	private String publisher;
+	public int pages;
+	public String publisher;
 	
 	public Book(int articleNumber, String title, int price, int pages, String publisher){
 		super(articleNumber, title, price);

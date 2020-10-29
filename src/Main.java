@@ -102,6 +102,36 @@ public class Main {
 
 	}
 
+	public static void writeToBookFile(Book book) {
+		
+		try {
+			FileWriter fW = new FileWriter("books.txt");
+			BufferedWriter bF = new BufferedWriter(fW);
+			PrintWriter pW = new PrintWriter(bF);
+			
+			pW.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", " + book.publisher);
+		}
+		catch(IOException e) {
+			System.out.println("The program couldn't find the file or files.");
+		}
+		
+	}
+	
+    public static void writeToMovieFile(Movie movie) {
+		
+		try {
+			FileWriter fW = new FileWriter("books.txt");
+			BufferedWriter bF = new BufferedWriter(fW);
+			PrintWriter pW = new PrintWriter(bF);
+			
+			pW.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", " + movie.imdbScore);
+		}
+		catch(IOException e) {
+			System.out.println("The program couldn't find the file or files.");
+		}
+		
+	}
+	
 	public static void list() {
 
 		if (mediaList.size() > 0) {
@@ -188,8 +218,6 @@ public class Main {
 
 	public static void register() {
 
-		boolean b = false;
-
 		System.out.println("");
 
 		System.out.println("What are you registering? Book(b) or a Movie(m)");
@@ -242,6 +270,8 @@ public class Main {
 
 				mediaList.add(book);
 				
+				writeToBookFile(book);
+				
 				System.out.println("The book: " + title + " was successfully added.");
 
 				System.out.println("");
@@ -291,6 +321,8 @@ public class Main {
 				Movie movie = new Movie(articleNumber, title, price, lengthMin, imdbRating);
 
 				mediaList.add(movie);
+				
+				writeToMovieFile(movie);
 				
 				System.out.println("The Movie: " + title + " was successfully added.");
 
@@ -387,8 +419,18 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 
 		while (true) {
+			
+			System.out.println("");
+			
+			System.out.println("Write your input:");
 
 			String userInput = scanner.nextLine();
+			
+			System.out.println("");
+			
+			System.out.println("> " + userInput);
+			
+			
 			Command command = parseCommand(userInput);
 			if (command == command.UNKNOWN) {
 				System.out.println("Unknown command. Try again.");
@@ -436,7 +478,7 @@ public class Main {
 		System.out.println("- deregister + articlenumber = Remove a book or movie from the library \n- info + articlenumber = Writes out information about the book or movie.");
 		System.out.println("- quit = Exit the program");
 		
-		System.out.println(System.getProperty("user.dir"));
+		System.out.println("");
 		
 		readFiles();
 
