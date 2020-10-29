@@ -1,9 +1,4 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -11,7 +6,7 @@ import java.util.Scanner;
 public class Main {
 
 	static Scanner scanner = new Scanner(System.in);
-
+	
 	static ArrayList<Media> mediaList = new ArrayList<>(); // Denna lista �r till f�r att lagra b�cker som �r
 															// tillg�ngliga (in stock)
 
@@ -106,27 +101,30 @@ public class Main {
 	public static void writeToBookFile(Book book) {
 
 		try {
-			FileWriter fW = new FileWriter("books.txt");
-			BufferedWriter bF = new BufferedWriter(fW);
-			PrintWriter pW = new PrintWriter(bF);
-
-			pW.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", "
-					+ book.publisher);
+			FileWriter fileWriter = new FileWriter("books.txt", true);
+			BufferedWriter bW = new BufferedWriter(fileWriter);
+			PrintWriter writer = new PrintWriter(bW);
+			
+			writer.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", " + book.publisher);
+			
+			writer.close();
 		} catch (IOException e) {
 			System.out.println("The program couldn't find the file or files.");
-		}
+		} 
 
 	}
 
 	public static void writeToMovieFile(Movie movie) {
 
 		try {
-			FileWriter fW = new FileWriter("books.txt");
-			BufferedWriter bF = new BufferedWriter(fW);
-			PrintWriter pW = new PrintWriter(bF);
-
-			pW.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", "
-					+ movie.imdbScore);
+			FileWriter fileWriter = new FileWriter("movies.txt", true);
+			BufferedWriter bW = new BufferedWriter(fileWriter);
+			PrintWriter writer = new PrintWriter(bW);
+			
+			writer.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", " + movie.imdbScore);
+			
+			writer.close();
+			
 		} catch (IOException e) {
 			System.out.println("The program couldn't find the file or files.");
 		}
@@ -139,7 +137,7 @@ public class Main {
 			for (int i = 0; i < mediaList.size(); i++) {
 
 				if (mediaList.get(i).inStock) {
-					System.out.println(mediaList.get(i) + " (in stock)");
+					System.out.println("  " + mediaList.get(i) + " (in stock)");
 
 				}
 
@@ -489,9 +487,19 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+		
+		readFiles();
 
 		System.out.println("Welcome to the library program!");
 
+		System.out.println("");
+		
+		System.out.println("  Currently registered books and movies.");
+		
+		System.out.println("");
+		
+		list();
+		
 		System.out.println("");
 
 		System.out.println(
@@ -504,7 +512,7 @@ public class Main {
 
 		System.out.println("");
 
-		readFiles();
+		
 
 		mainMenu();
 

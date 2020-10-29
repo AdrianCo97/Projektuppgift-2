@@ -1,5 +1,5 @@
 
-public class Movie extends Media {
+public class Movie extends Media{
 	
 	public int lengthMin;
 	public float imdbScore;
