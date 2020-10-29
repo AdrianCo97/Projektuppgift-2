@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -132,6 +133,8 @@ public class Main {
 	}
 
 	public static void list() {
+
+		Collections.sort(mediaList);
 
 		if (mediaList.size() > 0) {
 			for (int i = 0; i < mediaList.size(); i++) {

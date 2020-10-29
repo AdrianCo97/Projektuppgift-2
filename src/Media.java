@@ -1,5 +1,5 @@
 
-public abstract class Media {
+public abstract class Media implements Comparable<Media> {
 
 	protected int articleNumber;
 	protected String title;
@@ -12,6 +12,21 @@ public abstract class Media {
 		this.price = price;
 		this.inStock = true;
 
+	}
+
+	public int getArticleNumber() {
+		return articleNumber;
+	}
+
+	public int compareTo(Media artNr) {
+
+		int compare = ((Media) artNr).getArticleNumber();
+		return this.articleNumber - compare;
+	}
+
+	@Override
+	public String toString() {
+		return "ID: " + articleNumber + ", Title: " + title + ", Price: =" + price + "]";
 	}
 
 }
