@@ -1,2 +1,2 @@
-11345, The Dark Knight, 100, 152, 9.0
-19235, Lord of the Rings, 192, 228, 8.8
+
+19235, Lord of the Rings, 192, 228, 8.81001
