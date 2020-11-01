@@ -1,4 +1,9 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,7 +12,7 @@ import java.util.Scanner;
 public class Main {
 
 	static Scanner scanner = new Scanner(System.in);
-	
+
 	static ArrayList<Media> mediaList = new ArrayList<>(); // Denna lista �r till f�r att lagra b�cker som �r
 															// tillg�ngliga (in stock)
 
@@ -105,13 +110,14 @@ public class Main {
 			FileWriter fileWriter = new FileWriter("books.txt", true);
 			BufferedWriter bW = new BufferedWriter(fileWriter);
 			PrintWriter writer = new PrintWriter(bW);
-			
-			writer.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", " + book.publisher);
-			
+
+			writer.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", "
+					+ book.publisher);
+
 			writer.close();
 		} catch (IOException e) {
 			System.out.println("The program couldn't find the file or files.");
-		} 
+		}
 
 	}
 
@@ -121,11 +127,12 @@ public class Main {
 			FileWriter fileWriter = new FileWriter("movies.txt", true);
 			BufferedWriter bW = new BufferedWriter(fileWriter);
 			PrintWriter writer = new PrintWriter(bW);
-			
-			writer.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", " + movie.imdbScore);
-			
+
+			writer.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", "
+					+ movie.imdbScore);
+
 			writer.close();
-			
+
 		} catch (IOException e) {
 			System.out.println("The program couldn't find the file or files.");
 		}
@@ -355,6 +362,32 @@ public class Main {
 			if (mediaList.get(i).articleNumber == articleNumber) {
 				System.out.println("Successfully deregistered " + mediaList.get(i).title);
 				mediaList.remove(i);
+				try {
+					new FileWriter("books.txt", false).close();
+					new FileWriter("movies.txt", false).close();
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				for (int j = 0; j < mediaList.size(); j++) {
+
+					if (mediaList.get(j) instanceof Book) {
+						Book b = (Book) mediaList.get(j);
+
+						writeToBookFile(b);
+
+					}
+					if (mediaList.get(j) instanceof Movie) {
+						Movie m = (Movie) mediaList.get(j);
+
+						writeToMovieFile(m);
+
+					}
+
+				}
+
 			}
 
 		}
@@ -362,9 +395,9 @@ public class Main {
 	}
 
 	public static void info(int articleNumber) {
-		
+
 		checkArticleNumber(articleNumber);
-		
+
 		checkArticleNumberMatch(articleNumber);
 
 		for (int i = 0; i < mediaList.size(); i++) {
@@ -442,7 +475,7 @@ public class Main {
 			System.out.println("");
 
 			System.out.println("> " + userInput);
-			
+
 			System.out.println("");
 
 			Command command = parseCommand(userInput);
@@ -450,14 +483,12 @@ public class Main {
 				System.out.println("Unknown command. Try again.");
 				continue;
 			}
-			
+
 			int argument = 0;
 			try {
 				argument = parseArguments(userInput);
-			}
-			catch(NumberFormatException e) {
-				
-				
+			} catch (NumberFormatException e) {
+
 				System.out.println("You can only use digits with Commands.");
 
 				mainMenu();
@@ -490,19 +521,19 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		
+
 		readFiles();
 
 		System.out.println("Welcome to the library program!");
 
 		System.out.println("");
-		
+
 		System.out.println("  Currently registered books and movies.");
-		
+
 		System.out.println("");
-		
+
 		list();
-		
+
 		System.out.println("");
 
 		System.out.println(
@@ -514,8 +545,6 @@ public class Main {
 		System.out.println("- quit = Exit the program");
 
 		System.out.println("");
-
-		
 
 		mainMenu();
 
