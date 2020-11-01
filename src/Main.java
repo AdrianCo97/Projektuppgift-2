@@ -509,11 +509,11 @@ public class Main {
 		System.out.println("");
 
 		System.out.println(
-				"- list = View all the registered books or movies \n- checkout + articlenumber = Loan a book or a movie to a customer.");
+				"- list = View all the registered books or movies. \n- checkout + articlenumber = Loan a book or a movie to a customer.");
 		System.out.println(
-				"- checkin + articlenumber = Return a loaned book or movie to the library \n- register = Add a new book or movie to the library.");
+				"- checkin + articlenumber = Return a rented book or movie to the library. \n- register = Add a new book or movie to the library.");
 		System.out.println(
-				"- deregister + articlenumber = Remove a book or movie from the library \n- info + articlenumber = Writes out information about the book or movie.");
+				"- deregister + articlenumber = Remove a book or movie from the library. \n- info + articlenumber = Writes out information about the book or movie.");
 		System.out.println("- quit = Exit the program");
 
 		System.out.println("");
