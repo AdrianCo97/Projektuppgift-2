@@ -209,7 +209,7 @@ public class Main {
 	}
 
 	public static void checkIn(int articleNumber) {
-		// Method for returning a lended product
+		// Method for returning a lent product
 		checkArticleNumber(articleNumber);
 
 		for (int i = 0; i < mediaList.size(); i++) {
