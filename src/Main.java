@@ -12,9 +12,9 @@ public class Main {
 
 	static Scanner scanner = new Scanner(System.in);
 
-	static ArrayList<Media> mediaList = new ArrayList<>(); 
+	static ArrayList<Media> mediaList = new ArrayList<>();
 
-	static HashMap<Media, Customer> rentedMedia = new HashMap<>(); 
+	static HashMap<Media, Customer> rentedMedia = new HashMap<>();
 
 	public static void checkArticleNumber(int articleNumber) {
 		if (articleNumber < 10000 || articleNumber > 99999) {
@@ -91,7 +91,7 @@ public class Main {
 				Movie movie = new Movie(articleNumber, title, price, length, rating);
 
 				mediaList.add(movie);
-			
+
 			}
 			bufferedBookReader.close();
 			bufferedMovieReader.close();
@@ -107,9 +107,10 @@ public class Main {
 
 			FileWriter fW = new FileWriter("books.txt", true);
 			PrintWriter writer = new PrintWriter(fW);
-			
-			writer.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", " + book.publisher);
-			
+
+			writer.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", "
+					+ book.publisher);
+
 			writer.close();
 
 		} catch (IOException e) {
@@ -121,11 +122,12 @@ public class Main {
 	public static void writeToMovieFile(Movie movie) {
 
 		try {
-			
+
 			FileWriter fW = new FileWriter("movies.txt", true);
 			PrintWriter writer = new PrintWriter(fW);
-			
-			writer.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", " + movie.imdbScore);
+
+			writer.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", "
+					+ movie.imdbScore);
 
 			writer.close();
 
@@ -134,18 +136,17 @@ public class Main {
 		}
 
 	}
-	
+
 	public static void writeToRentedFile() {
 		try {
 			FileWriter fW = new FileWriter("rented.txt");
 			PrintWriter pW = new PrintWriter(fW);
-			
-			for(Media i : rentedMedia.keySet()) {
+
+			for (Media i : rentedMedia.keySet()) {
 				pW.println(i + " rented by: " + rentedMedia.get(i));
 			}
 			pW.close();
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
 			System.out.println("The program couldn't find the file.");
 		}
 	}
@@ -226,6 +227,7 @@ public class Main {
 
 				rentedMedia.remove(mediaList.get(i));
 				mediaList.get(i).inStock = true;
+				System.out.print(mediaList.get(i) + " is now returned to stock.\n");
 
 			}
 		}
