@@ -12,9 +12,9 @@ public class Main {
 
 	static Scanner scanner = new Scanner(System.in);
 
-	static ArrayList<Media> mediaList = new ArrayList<>(); //This list stores all the books and movies.
+	static ArrayList<Media> mediaList = new ArrayList<>(); 
 
-	static HashMap<Media, Customer> rentedMedia = new HashMap<>(); //If a book or movie gets rented to a customer it will be stored in this HashMap. The product then gets linked to a customer.
+	static HashMap<Media, Customer> rentedMedia = new HashMap<>(); 
 
 	public static void checkArticleNumber(int articleNumber) {
 		if (articleNumber < 10000 || articleNumber > 99999) {
@@ -25,7 +25,7 @@ public class Main {
 	}
 
 	public static void checkArticleNumberMatch(int articleNumber) {
-
+		// Method to check if given id is correct
 		boolean match = false;
 
 		for (int i = 0; i < mediaList.size(); i++) {
@@ -37,15 +37,13 @@ public class Main {
 
 		if (match == false) {
 			System.out.println("There are no registered products with this ID.");
-
 			System.out.println("");
-
 			mainMenu();
 		}
 
 	}
 
-	public static void readFiles() { //This method reads the files. Seperates each word by the comma. It then creates a new book or movie based on those values.
+	public static void readFiles() { 
 
 		try {
 
@@ -101,7 +99,7 @@ public class Main {
 
 	}
 
-	public static void writeToBookFile(Book book) { //This method takes a book and prints the values into a txt file.
+	public static void writeToBookFile(Book book) { 
 
 		try {
 
@@ -137,7 +135,7 @@ public class Main {
 
 	}
 
-	public static void writeToRentedFile() { //This method writes the entire hashMap into a txt file called "rented". This is to track what's rented to who.
+	public static void writeToRentedFile() { 
 		try {
 			FileWriter fW = new FileWriter("rented.txt");
 			PrintWriter pW = new PrintWriter(fW);
@@ -151,27 +149,25 @@ public class Main {
 		}
 	}
 
-	public static void list() { //This method writes every book and movie in a list.
+
+
+
+	public static void list() {
+		// Method to list all products
 
 		Collections.sort(mediaList);
-
 		if (mediaList.size() > 0) {
 			for (int i = 0; i < mediaList.size(); i++) {
-
 				if (mediaList.get(i).inStock) {
 					System.out.println("  " + mediaList.get(i) + " (in stock)");
-
 				}
-
 			}
-
 			for (Media i : rentedMedia.keySet()) {
 				System.out.println(i + " is rented by: " + rentedMedia.get(i));
 			}
 		} else {
 			System.out.println("There are no books or movies registered.");
 		}
-
 	}
 
 	public static void checkOut(int articleNumber) { //This method is used to rent a product to a customer. 
@@ -217,24 +213,19 @@ public class Main {
 	}
 
 	public static void checkIn(int articleNumber) {
-
+		// Method for returning a lent product
 		checkArticleNumber(articleNumber);
 
 		for (int i = 0; i < mediaList.size(); i++) {
 			if (mediaList.get(i).articleNumber == articleNumber) {
-
-				// mediaList.add(articleNumber, mediaList.get(i));
-
 				rentedMedia.remove(mediaList.get(i));
 				mediaList.get(i).inStock = true;
 				System.out.print(mediaList.get(i) + " is now returned to stock.\n");
-
 			}
 		}
-
 	}
 
-	public static void register() { //This method is used to register a new book or movie to the library. 
+	public static void register() { 
 
 		System.out.println("What are you registering? Book(b) or a Movie(m)");
 
@@ -358,11 +349,9 @@ public class Main {
 	}
 
 	public static void deRegister(int articleNumber) {
-
+		// Method for deregister a book from stock. Updates files.
 		checkArticleNumber(articleNumber);
-
 		checkArticleNumberMatch(articleNumber);
-
 		for (int i = 0; i < mediaList.size(); i++) {
 			if (mediaList.get(i).articleNumber == articleNumber) {
 				System.out.println("Successfully deregistered " + mediaList.get(i).title);
@@ -400,11 +389,9 @@ public class Main {
 	}
 
 	public static void info(int articleNumber) {
-
+		// Method that shows all information about a product.
 		checkArticleNumber(articleNumber);
-
 		checkArticleNumberMatch(articleNumber);
-
 		for (int i = 0; i < mediaList.size(); i++) {
 
 			if (mediaList.get(i) instanceof Book) {
