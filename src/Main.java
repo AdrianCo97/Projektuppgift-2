@@ -163,7 +163,7 @@ public class Main {
 				}
 			}
 			for (Media i : rentedMedia.keySet()) {
-				System.out.println(i + " is rented by: " + rentedMedia.get(i));
+				System.out.println("  " + i + " is rented by: " + rentedMedia.get(i));
 			}
 		} else {
 			System.out.println("There are no books or movies registered.");
