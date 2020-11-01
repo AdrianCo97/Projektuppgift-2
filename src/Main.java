@@ -12,9 +12,9 @@ public class Main {
 
 	static Scanner scanner = new Scanner(System.in);
 
-	static ArrayList<Media> mediaList = new ArrayList<>(); 
+	static ArrayList<Media> mediaList = new ArrayList<>(); //This list stores all the books and movies.
 
-	static HashMap<Media, Customer> rentedMedia = new HashMap<>(); 
+	static HashMap<Media, Customer> rentedMedia = new HashMap<>(); //If a book or movie gets rented to a customer it will be stored in this HashMap. The product then gets linked to a customer.
 
 	public static void checkArticleNumber(int articleNumber) {
 		if (articleNumber < 10000 || articleNumber > 99999) {
@@ -43,7 +43,7 @@ public class Main {
 
 	}
 
-	public static void readFiles() { 
+	public static void readFiles() { //This method reads the files. Seperates each word by the comma. It then creates a new book or movie based on those values.
 
 		try {
 
@@ -99,7 +99,7 @@ public class Main {
 
 	}
 
-	public static void writeToBookFile(Book book) { 
+	public static void writeToBookFile(Book book) { //This method takes a book and prints the values into a txt file.
 
 		try {
 
@@ -135,7 +135,7 @@ public class Main {
 
 	}
 
-	public static void writeToRentedFile() { 
+	public static void writeToRentedFile() { //This method writes the entire hashMap into a txt file called "rented". This is to track what's rented to who.
 		try {
 			FileWriter fW = new FileWriter("rented.txt");
 			PrintWriter pW = new PrintWriter(fW);
@@ -225,7 +225,7 @@ public class Main {
 		}
 	}
 
-	public static void register() { 
+	public static void register() { //This method is used to register a new book or movie to the library. 
 
 		System.out.println("What are you registering? Book(b) or a Movie(m)");
 
