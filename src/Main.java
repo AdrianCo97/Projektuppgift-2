@@ -25,7 +25,7 @@ public class Main {
 	}
 
 	public static void checkArticleNumberMatch(int articleNumber) {
-
+		// Method to check if given id is correct
 		boolean match = false;
 
 		for (int i = 0; i < mediaList.size(); i++) {
@@ -37,9 +37,7 @@ public class Main {
 
 		if (match == false) {
 			System.out.println("There are no registered products with this ID.");
-
 			System.out.println("");
-
 			mainMenu();
 		}
 
@@ -152,26 +150,20 @@ public class Main {
 	}
 
 	public static void list() {
-
+		// Method to list all products
 		Collections.sort(mediaList);
-
 		if (mediaList.size() > 0) {
 			for (int i = 0; i < mediaList.size(); i++) {
-
 				if (mediaList.get(i).inStock) {
 					System.out.println("  " + mediaList.get(i) + " (in stock)");
-
 				}
-
 			}
-
 			for (Media i : rentedMedia.keySet()) {
 				System.out.println(i + " is rented by: " + rentedMedia.get(i));
 			}
 		} else {
 			System.out.println("There are no books or movies registered.");
 		}
-
 	}
 
 	public static void checkOut(int articleNumber) {
@@ -217,21 +209,16 @@ public class Main {
 	}
 
 	public static void checkIn(int articleNumber) {
-
+		// Method for returning a lended product
 		checkArticleNumber(articleNumber);
 
 		for (int i = 0; i < mediaList.size(); i++) {
 			if (mediaList.get(i).articleNumber == articleNumber) {
-
-				// mediaList.add(articleNumber, mediaList.get(i));
-
 				rentedMedia.remove(mediaList.get(i));
 				mediaList.get(i).inStock = true;
 				System.out.print(mediaList.get(i) + " is now returned to stock.\n");
-
 			}
 		}
-
 	}
 
 	public static void register() {
@@ -358,11 +345,9 @@ public class Main {
 	}
 
 	public static void deRegister(int articleNumber) {
-
+		// Method for deregister a book from stock. Updates files.
 		checkArticleNumber(articleNumber);
-
 		checkArticleNumberMatch(articleNumber);
-
 		for (int i = 0; i < mediaList.size(); i++) {
 			if (mediaList.get(i).articleNumber == articleNumber) {
 				System.out.println("Successfully deregistered " + mediaList.get(i).title);
@@ -400,11 +385,9 @@ public class Main {
 	}
 
 	public static void info(int articleNumber) {
-
+		// Method that shows all information about a product.
 		checkArticleNumber(articleNumber);
-
 		checkArticleNumberMatch(articleNumber);
-
 		for (int i = 0; i < mediaList.size(); i++) {
 
 			if (mediaList.get(i) instanceof Book) {
