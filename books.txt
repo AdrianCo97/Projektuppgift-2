@@ -1,2 +1,2 @@
 10002, Liftaren, 100, 345, Doug
-10003, asd, 123, 123, help
+19283, Tintin, 100, 230, Hergé
