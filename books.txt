@@ -1,3 +1,2 @@
-
 10002, Liftaren, 100, 345, Doug
-19283, Tintin, 100, 230, Hergé10002
+19283, Tintin, 100, 230, Hergé

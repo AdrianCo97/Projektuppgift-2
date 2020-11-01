@@ -12,11 +12,9 @@ public class Main {
 
 	static Scanner scanner = new Scanner(System.in);
 
-	static ArrayList<Media> mediaList = new ArrayList<>(); // Denna lista �r till f�r att lagra b�cker som �r
-															// tillg�ngliga (in stock)
+	static ArrayList<Media> mediaList = new ArrayList<>(); 
 
-	static HashMap<Media, Customer> rentedMedia = new HashMap<>(); // Denna �r till f�r att lagra b�cker som �r
-																	// utl�nade.
+	static HashMap<Media, Customer> rentedMedia = new HashMap<>(); 
 
 	public static void checkArticleNumber(int articleNumber) {
 		if (articleNumber < 10000 || articleNumber > 99999) {
@@ -93,7 +91,7 @@ public class Main {
 				Movie movie = new Movie(articleNumber, title, price, length, rating);
 
 				mediaList.add(movie);
-
+			
 			}
 			bufferedBookReader.close();
 			bufferedMovieReader.close();
@@ -109,10 +107,9 @@ public class Main {
 
 			FileWriter fW = new FileWriter("books.txt", true);
 			PrintWriter writer = new PrintWriter(fW);
-
-			writer.print("\n" + book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", "
-					+ book.publisher);
-
+			
+			writer.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", " + book.publisher);
+			
 			writer.close();
 
 		} catch (IOException e) {
@@ -124,12 +121,11 @@ public class Main {
 	public static void writeToMovieFile(Movie movie) {
 
 		try {
-
+			
 			FileWriter fW = new FileWriter("movies.txt", true);
 			PrintWriter writer = new PrintWriter(fW);
-
-			writer.print("\n" + movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin
-					+ ", " + movie.imdbScore);
+			
+			writer.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", " + movie.imdbScore);
 
 			writer.close();
 
@@ -137,6 +133,21 @@ public class Main {
 			System.out.println("The program couldn't find the file or files.");
 		}
 
+	}
+	
+	public static void writeToRentedFile() {
+		try {
+			FileWriter fW = new FileWriter("rented.txt");
+			PrintWriter pW = new PrintWriter(fW);
+			
+			for(Media i : rentedMedia.keySet()) {
+				pW.println(i + " rented by: " + rentedMedia.get(i));
+			}
+			pW.close();
+		}
+		catch(IOException e) {
+			System.out.println("The program couldn't find the file.");
+		}
 	}
 
 	public static void list() {
@@ -200,13 +211,11 @@ public class Main {
 
 				}
 			}
+			writeToRentedFile();
 		}
 	}
 
 	public static void checkIn(int articleNumber) {
-		// Ta tillbaka en utl�nad produkt med artikelnummer.
-
-		// Argumentet tar emot artikelnummer som argument.
 
 		checkArticleNumber(articleNumber);
 
@@ -347,12 +356,6 @@ public class Main {
 	}
 
 	public static void deRegister(int articleNumber) {
-		// Metod f�r att avregistrera en produkt.
-
-		// Tar emot artikelnummer som argument
-
-		// > deregister 12346
-		// Successfully deregistered The Great Gatsby
 
 		checkArticleNumber(articleNumber);
 
