@@ -15,10 +15,4 @@ public class Book extends Media{
     public String toString() {
 		return articleNumber + " (Book) " + this.title;
 	}
-	
-	public String getTitle() {
-		return this.title;
-	}
-	
-
 }

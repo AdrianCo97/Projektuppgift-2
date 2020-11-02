@@ -14,9 +14,4 @@ public class Movie extends Media{
 	public String toString() {
 		return articleNumber + " (Movie) " + title;
 	}
-
-	public String getTitle() {
-		return this.title;
-	}
-
 }
