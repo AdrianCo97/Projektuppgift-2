@@ -4,6 +4,9 @@ Ett enkelt program för att lagerföra böcker och filmer samt låna ut dessa oc
 
 Gemensamma värden för båda typerna, artikelnummer, titel och värde. Därutöver tillkommer sidor och författare för böcker samt längd i minuter och IMDB rating.
 
+För att köra: 
+Kompilera alla filer och kör Main klassen. 
+
 Funktioner:
 	
 list 		Listar samtliga produkter och eventuell information om utlåning.

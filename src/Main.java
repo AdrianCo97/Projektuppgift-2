@@ -348,8 +348,9 @@ public class Main {
 		// Method for deregister a book from stock. Updates files.
 		checkArticleNumber(articleNumber);
 		checkArticleNumberMatch(articleNumber);
+
 		for (int i = 0; i < mediaList.size(); i++) {
-			if (mediaList.get(i).articleNumber == articleNumber) {
+			if (mediaList.get(i).articleNumber == articleNumber && mediaList.get(i).inStock) {
 				System.out.println("Successfully deregistered " + mediaList.get(i).title);
 				mediaList.remove(i);
 				try {
@@ -373,10 +374,11 @@ public class Main {
 						Movie m = (Movie) mediaList.get(j);
 
 						writeToMovieFile(m);
-
 					}
-
 				}
+			} else {
+				System.out.print("The product is rented. Please checkin before deregister.");
+				break;
 
 			}
 
