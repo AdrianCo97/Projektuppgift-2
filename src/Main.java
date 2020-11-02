@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.io.*;
 
 public class Main {
 
@@ -42,14 +43,52 @@ public class Main {
 		}
 
 	}
+	
+	public static void createNewBookFile() {
+		File bookFile = new File("books.txt");
+		
+		try {
+			if(!bookFile.exists()) {
+				bookFile.createNewFile();
+				
+				System.out.println("Couldn't find the books file. A new one has been created.");
+			}
+		}
+		catch(IOException e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
+	public static void createNewMovieFile() {
+		File movieFile = new File("movies.txt");
+		
+		try {
+			if(!movieFile.exists()) {
+				movieFile.createNewFile();
+				
+				System.out.println("Couldn't find the books file. A new one has been created.");
+			}
+		}
+		catch(IOException e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
 
 	public static void readFiles() { //This method reads the files. Seperates each word by the comma. It then creates a new book or movie based on those values.
+		
+		
+		
 
 		try {
+			
+			createNewBookFile();
 
 			BufferedReader bufferedBookReader = new BufferedReader(new FileReader("books.txt"));
 
 			String bookStr;
+			
 
 			while ((bookStr = bufferedBookReader.readLine()) != null) {
 				String[] values = bookStr.split(", ");
@@ -69,9 +108,12 @@ public class Main {
 				mediaList.add(book);
 
 			}
+			
+			createNewMovieFile();
 
 			BufferedReader bufferedMovieReader = new BufferedReader(new FileReader("movies.txt"));
 			String movieStr;
+			
 
 			while ((movieStr = bufferedMovieReader.readLine()) != null) {
 				String[] values = movieStr.split(", ");
@@ -100,6 +142,8 @@ public class Main {
 	}
 
 	public static void writeToBookFile(Book book) { //This method takes a book and prints the values into a txt file.
+		
+		createNewBookFile();
 
 		try {
 
@@ -118,6 +162,8 @@ public class Main {
 	}
 
 	public static void writeToMovieFile(Movie movie) {
+		
+		createNewMovieFile();
 
 		try {
 
@@ -136,7 +182,17 @@ public class Main {
 	}
 
 	public static void writeToRentedFile() { //This method writes the entire hashMap into a txt file called "rented". This is to track what's rented to who.
+		
+        File rentedFile = new File("rented.txt");
+		
 		try {
+			
+			if(!rentedFile.exists()) {
+				rentedFile.createNewFile();
+				
+			   System.out.println("Couldn't find the rented file. A new one has been created.");
+			}
+			
 			FileWriter fW = new FileWriter("rented.txt");
 			PrintWriter pW = new PrintWriter(fW);
 
@@ -144,9 +200,11 @@ public class Main {
 				pW.println(i + " rented by: " + rentedMedia.get(i));
 			}
 			pW.close();
-		} catch (IOException e) {
-			System.out.println("The program couldn't find the file.");
 		}
+		catch(IOException e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 
 
