@@ -223,6 +223,31 @@ public class Main {
 			}
 			writeToRentedFile();
 		}
+		try {
+			FileWriter bookFW = new FileWriter("books.txt");
+			PrintWriter bookPW = new PrintWriter(bookFW);
+			FileWriter movieFW = new FileWriter("movies.txt");
+			PrintWriter moviePW = new PrintWriter(movieFW);
+			for (Media m : mediaList ) {
+				if (m instanceof Book && m.inStock) {
+					Book book = (Book)m;
+					
+					bookPW.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", " + book.publisher);
+
+				} else if (m instanceof Movie && m.inStock) {
+					Movie movie = (Movie)m;
+					
+					moviePW.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", " + movie.imdbScore);
+
+				}
+			}
+			bookPW.close();
+			moviePW.close();
+		} 
+		catch (IOException e) {
+			
+				System.out.println(e.getMessage());
+		}
 	}
 
 	public static void checkIn(int articleNumber) {
