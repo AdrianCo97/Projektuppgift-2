@@ -106,6 +106,8 @@ public class Main {
 				mediaList.add(movie);
 
 			}
+			
+			
 			bufferedBookReader.close();
 			bufferedMovieReader.close();
 		} catch (IOException e) {
@@ -216,10 +218,10 @@ public class Main {
 					System.out.println("Sucessfully lended " + mediaList.get(i).title + " to " + customer.getName());
 
 					rentedMedia.put(mediaList.get(i), customer);
-
+					
 					mediaList.get(i).inStock = false;
-
 				}
+				
 			}
 			writeToRentedFile();
 		}
@@ -249,6 +251,7 @@ public class Main {
 				System.out.println(e.getMessage());
 		}
 	}
+	
 
 	public static void checkIn(int articleNumber) {
 		// Method for returning a lent product
@@ -376,7 +379,9 @@ public class Main {
 				mainMenu();
 
 			} else {
-				System.out.println(input + " is not a valid input");
+				System.out.println(input + " is not a valid input. Try again.");
+				System.out.println("");
+				register();
 			}
 		} catch (NumberFormatException e) {
 			System.out.println("The input must be digits.");
@@ -401,7 +406,7 @@ public class Main {
 					new FileWriter("movies.txt", false).close();
 
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 
@@ -419,6 +424,12 @@ public class Main {
 						writeToMovieFile(m);
 					}
 				}
+
+			} else {
+				System.out.print("The product is already rented. Please use checkin on this book or movie before using deregister.");
+				break;
+
+
 			}
 
 		}
