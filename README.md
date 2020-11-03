@@ -1,6 +1,6 @@
 Projektuppgift 2 – Lagersystem för Bibliotek
 
-Ett enkelt program för att lagerföra böcker och filmer samt låna ut dessa och registrera kunduppgifter. Programmet sparar uppgifter om böcker, filmer och vilka som är utlånade till respektive kunder i filer, books.txt, movies.txt och customers.txt. Vid start läser programmet in uppgifter om dessa finns, annars skapas nya filer under programmets gång, gamla kommer att uppdateras.
+Ett enkelt program för att lagerföra böcker och filmer samt låna ut dessa och registrera kunduppgifter. Programmet sparar uppgifter om böcker, filmer och vilka som är utlånade till respektive kunder i filer, books.txt, movies.txt och rented.txt. Vid start läser programmet in uppgifter om dessa finns, annars skapas nya filer under programmets gång, gamla kommer att uppdateras.
 
 Gemensamma värden för båda typerna, artikelnummer, titel och värde. Därutöver tillkommer sidor och författare för böcker samt längd i minuter och IMDB rating.
 
