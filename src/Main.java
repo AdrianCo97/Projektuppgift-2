@@ -207,10 +207,7 @@ public class Main {
 		
 	}
 
-
-
-
-	public static void list() {
+    public static void list() {
 		// Method to list all products
 
 		Collections.sort(mediaList);
@@ -561,11 +558,14 @@ public class Main {
 
 			} else if (command == Command.DEREGISTER) {
 				deRegister(argument);
+				
 			} else if (command == Command.INFO) {
 				info(argument);
+				
 			} else if (command == Command.QUIT) {
-				// Avsluta programmet.
-
+				
+				System.out.println("Thanks for using the program.");
+				System.exit(0);
 			}
 
 		}
@@ -588,14 +588,10 @@ public class Main {
 
 		System.out.println("");
 
-		System.out.println(
-				"- list = View all the registered books or movies. \n- checkout + articlenumber = Loan a book or a movie to a customer.");
-		System.out.println(
-				"- checkin + articlenumber = Return a rented book or movie to the library. \n- register = Add a new book or movie to the library.");
-		System.out.println(
-				"- deregister + articlenumber = Remove a book or movie from the library. \n- info + articlenumber = Writes out information about the book or movie.");
+		System.out.println("- list = View all the registered books or movies. \n- checkout + articlenumber = Loan a book or a movie to a customer.");
+		System.out.println("- checkin + articlenumber = Return a rented book or movie to the library. \n- register = Add a new book or movie to the library.");
+		System.out.println("- deregister + articlenumber = Remove a book or movie from the library. \n- info + articlenumber = Writes out information about the book or movie.");
 		System.out.println("- quit = Exit the program");
-
 		System.out.println("");
 
 		mainMenu();
