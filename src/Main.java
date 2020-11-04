@@ -268,11 +268,11 @@ public class Main {
 				System.out.println("The book: " + title + " was successfully added.");
 
 				System.out.println("");
-
-				mainMenu();
 				
 				writeToMediaFile();
 
+				mainMenu();
+				
 			} else if (input.equals("m")) {
 
 				System.out.println("");
@@ -315,10 +315,12 @@ public class Main {
 				System.out.println("The Movie: " + title + " was successfully added.");
 
 				System.out.println("");
+				
+				writeToMediaFile();
 
 				mainMenu();
 				
-				writeToMediaFile();
+				
 
 			} else {
 				System.out.println(input + " is not a valid input. Try again.");
