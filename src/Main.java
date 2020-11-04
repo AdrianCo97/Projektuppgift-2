@@ -126,7 +126,7 @@ public class Main {
 	public static void writeToRentedFile() { // This method writes the entire hashMap into a txt file called "rented".
 												// This is to track what's rented to who.
 		try {
-			FileOutputStream fOutput = new FileOutputStream("rented.txt", true);
+			FileOutputStream fOutput = new FileOutputStream("rented.txt");
 			ObjectOutputStream oOutput = new ObjectOutputStream(fOutput);
 
 			oOutput.writeObject(rentedMedia);
