@@ -72,56 +72,19 @@ public class Main {
 	}
 
 	public static void readFiles() { // This method reads the files. Seperates each word by the comma. It then
-										// creates a new book or movie based on those values.
-
+		                             // creates a new book or movie based on those values.
+		
 		try {
 			
-
-			BufferedReader bufferedBookReader = new BufferedReader(new FileReader("books.txt"));
-
-			String bookStr;
-
-			while ((bookStr = bufferedBookReader.readLine()) != null) {
-				String[] values = bookStr.split(", ");
-
-				int articleNumber = Integer.parseInt(values[0]);
-
-				String title = values[1];
-
-				int price = Integer.parseInt(values[2]);
-
-				int pages = Integer.parseInt(values[3]);
-
-				String publisher = values[4];
-
-				Book book = new Book(articleNumber, title, price, pages, publisher);
-
-				mediaList.add(book);
-
-			}
-
-			BufferedReader bufferedMovieReader = new BufferedReader(new FileReader("movies.txt"));
-			String movieStr;
-
-			while ((movieStr = bufferedMovieReader.readLine()) != null) {
-				String[] values = movieStr.split(", ");
-
-				int articleNumber = Integer.parseInt(values[0]);
-
-				String title = values[1];
-
-				int price = Integer.parseInt(values[2]);
-
-				int length = Integer.parseInt(values[3]);
-
-				float rating = Float.parseFloat(values[4]);
-
-				Movie movie = new Movie(articleNumber, title, price, length, rating);
-
-				mediaList.add(movie);
-
-			}
-			
+			FileInputStream movieInput = new FileInputStream("mediadata.txt");
+            ObjectInputStream mOInput = new ObjectInputStream(movieInput);
+            
+            mediaList = (ArrayList<Media>) mOInput.readObject();
+            
+            movieInput.close();
+			mOInput.close();
+            
+   		
 			FileInputStream fInput = new FileInputStream("rented.txt");
 			ObjectInputStream oInput = new ObjectInputStream(fInput);
 			
@@ -129,8 +92,8 @@ public class Main {
 			
 			fInput.close();
 			oInput.close();
-			bufferedBookReader.close();
-			bufferedMovieReader.close();
+		    
+			
 		} catch (IOException e) {
 			System.out.println("The program couldn't find the file or files.");
 		} catch (ClassNotFoundException e) {
@@ -141,46 +104,30 @@ public class Main {
 	}
 
 	
-	public static void writeToBookFile(Book book) { // This method takes a book and prints the values into a txt file.
-
-		try {
-
-			FileWriter fW = new FileWriter("books.txt", true);
-			PrintWriter writer = new PrintWriter(fW);
-
-			writer.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", "
-					+ book.publisher);
-
-			writer.close();
-
-		} catch (IOException e) {
-			System.out.println("The program couldn't find the file or files.");
-		}
-
-	}
 	
-	public static void writeToMovieFile(Movie movie) {
+	public static void writeToMediaFile() { // This method takes a book and prints the values into a txt file.
 
 		try {
 
-			FileWriter fW = new FileWriter("movies.txt", true);
-			PrintWriter writer = new PrintWriter(fW);
+			FileOutputStream fOutput = new FileOutputStream("mediadata.txt", true);
+			ObjectOutputStream oOutput = new ObjectOutputStream(fOutput);
 
-			writer.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", "
-					+ movie.imdbScore);
-
-			writer.close();
+			oOutput.writeObject(mediaList);
+			
+			fOutput.close();
+			oOutput.close();
 
 		} catch (IOException e) {
 			System.out.println("The program couldn't find the file or files.");
 		}
 
 	}
+
 
 	public static void writeToRentedFile() { // This method writes the entire hashMap into a txt file called "rented".
 												// This is to track what's rented to who.
 		try {
-			FileOutputStream fOutput = new FileOutputStream("rented.txt");
+			FileOutputStream fOutput = new FileOutputStream("rented.txt", true);
 			ObjectOutputStream oOutput = new ObjectOutputStream(fOutput);
 
 			oOutput.writeObject(rentedMedia);
@@ -251,31 +198,7 @@ public class Main {
 			}
 			writeToRentedFile();
 		}
-		try {
-			FileWriter bookFW = new FileWriter("books.txt");
-			PrintWriter bookPW = new PrintWriter(bookFW);
-			FileWriter movieFW = new FileWriter("movies.txt");
-			PrintWriter moviePW = new PrintWriter(movieFW);
-			for (Media m : mediaList ) {
-				if (m instanceof Book && m.inStock) {
-					Book book = (Book)m;
-					
-					bookPW.println(book.articleNumber + ", " + book.title + ", " + book.price + ", " + book.pages + ", " + book.publisher);
-
-				} else if (m instanceof Movie && m.inStock) {
-					Movie movie = (Movie)m;
-					
-					moviePW.println(movie.articleNumber + ", " + movie.title + ", " + movie.price + ", " + movie.lengthMin + ", " + movie.imdbScore);
-
-				}
-			}
-			bookPW.close();
-			moviePW.close();
-		} 
-		catch (IOException e) {
-			
-				System.out.println(e.getMessage());
-		}
+		
 	}
 	
 
@@ -339,8 +262,6 @@ public class Main {
 
 				mediaList.add(book);
 
-				writeToBookFile(book);
-
 				System.out.println("The book: " + title + " was successfully added.");
 
 				System.out.println("");
@@ -386,8 +307,6 @@ public class Main {
 
 				mediaList.add(movie);
 
-				writeToMovieFile(movie);
-
 				System.out.println("The Movie: " + title + " was successfully added.");
 
 				System.out.println("");
@@ -426,20 +345,20 @@ public class Main {
 					e.printStackTrace();
 				}
 
-				for (int j = 0; j < mediaList.size(); j++) {
-
-					if (mediaList.get(j) instanceof Book) {
-						Book b = (Book) mediaList.get(j);
-
-						writeToBookFile(b);
-
-					}
-					if (mediaList.get(j) instanceof Movie) {
-						Movie m = (Movie) mediaList.get(j);
-
-						writeToMovieFile(m);
-					}
-				}
+//				for (int j = 0; j < mediaList.size(); j++) {
+//
+//					if (mediaList.get(j) instanceof Book) {
+//						Book b = (Book) mediaList.get(j);
+//
+//						writeToBookFile(b);
+//
+//					}
+//					if (mediaList.get(j) instanceof Movie) {
+//						Movie m = (Movie) mediaList.get(j);
+//
+//						writeToMovieFile(m);
+//					}
+//				}
 
 			} else {
 				System.out.print("The product is already rented. Please use checkin on this book or movie before using deregister.");
@@ -568,8 +487,10 @@ public class Main {
 			} else if (command == Command.INFO) {
 				info(argument);
 			} else if (command == Command.QUIT) {
-				// Avsluta programmet.
-
+				System.out.println("Thanks for using the program.");
+				System.out.println("Saving...");
+				writeToMediaFile();
+				System.exit(0);
 			}
 
 		}
