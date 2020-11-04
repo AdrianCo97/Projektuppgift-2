@@ -20,8 +20,7 @@ public class Main {
 
 	public static void checkArticleNumber(int articleNumber) {
 		if (articleNumber < 10000 || articleNumber > 99999) {
-			System.out.println("Invalid article ID, expecting 10000-99999. Please try again.");
-			System.out.println("");
+			System.out.println("  Invalid article ID, expecting 10000-99999. Please try again.\n");
 			mainMenu();
 		}
 	}
@@ -38,8 +37,7 @@ public class Main {
 		}
 
 		if (match == false) {
-			System.out.println("There are no registered products with this ID.");
-			System.out.println("");
+			System.out.println("  There are no registered products with this ID.\n");
 			mainMenu();
 		}
 
@@ -48,16 +46,14 @@ public class Main {
 	public static void checkForExistingMedia(int articleNumber) {
 		for (Media i : rentedMedia.keySet()) {
 			if (articleNumber == i.articleNumber) {
-				System.out.println(i + " already exists and it's currently rented by: " + rentedMedia.get(i));
-				System.out.println("");
+				System.out.println(i + " already exists and it's currently rented by: " + rentedMedia.get(i) + "\n");
 				mainMenu();
 			}
 		}
 
 		for (int i = 0; i < mediaList.size(); i++) {
 			if (articleNumber == mediaList.get(i).articleNumber) {
-				System.out.println("A book or movie with this ID already exists. Try again");
-				System.out.println("");
+				System.out.println("  A book or movie with this ID already exists. Try again\n");
 				mainMenu();
 			}
 		}
@@ -67,7 +63,7 @@ public class Main {
 		for (int i = 0; i < mediaList.size(); i++) {
 
 			if (mediaList.get(i).articleNumber == articleNumberToCheck && mediaList.get(i).inStock == false) {
-				System.out.print("The product is rented. Please checkin before deregister.");
+				System.out.print("  The product is rented. Please checkin before deregister.");
 				mainMenu();
 
 			}
@@ -99,7 +95,7 @@ public class Main {
 		} catch (IOException e) {
 
 		} catch (ClassNotFoundException e) {
-			System.out.println("The program couldn't dezerialize from the file.");
+			System.out.println("  The program couldn't dezerialize from the file.");
 		}
 
 	}
@@ -117,7 +113,7 @@ public class Main {
 			oOutput.close();
 
 		} catch (IOException e) {
-			System.out.println("The program couldn't find the file or files.");
+			System.out.println("  The program couldn't find the file or files.");
 		}
 
 	}
@@ -133,7 +129,7 @@ public class Main {
 			fOutput.close();
 			oOutput.close();
 		} catch (IOException e) {
-			System.out.println("The program couldn't find the file.");
+			System.out.println("  The program couldn't find the file.");
 		}
 	}
 
@@ -145,14 +141,23 @@ public class Main {
 		if (mediaList.size() == 0) {
 			System.out.println("  There are no registered books or movies.");
 		}
-		for (Media m : mediaList) {
-			if (m.inStock) {
-				System.out.println("  " + m + " (in stock)");
+		else {
+			System.out.println("  Currently registered books and movies:\n");
+			for (Media m : mediaList) {
+				if (m.inStock) {
+					System.out.println("  " + m + " (in stock)");
+				}
 			}
+		}
+		System.out.println("");
+		
+		if(rentedMedia.size() > 0) {
+			System.out.println("  Currently rented books and movies:\n");
 		}
 		for (Media m : rentedMedia.keySet()) {
 			System.out.println("  " + m + " is rented by: " + rentedMedia.get(m));
 		}
+		System.out.println("  _____________________________________________________________________");
 	}
 
 	public static void checkOut(int articleNumber) { // This method is used to rent a product to a customer.
@@ -164,28 +169,31 @@ public class Main {
 		for (Media i : rentedMedia.keySet()) {
 			if (articleNumber == i.articleNumber) {
 				System.out.println(i + "Is already rented by: " + rentedMedia.get(i));
+				System.out.println("  _____________________________________________________________________");
 				mainMenu();
 			}
 		}
 
-		System.out.println("Enter customer name: ");
+		System.out.println("  Enter customer name: ");
 
 		String name = scanner.nextLine();
+		
+		System.out.println("> " + name + "\n");
 
-		System.out.println("");
-
-		System.out.println("Enter the customers phone number: ");
+		System.out.println("  Enter the customers phone number: ");
 
 		String phoneNumber = scanner.nextLine();
+		
+		System.out.println("> " + phoneNumber + "\n");
 
 		Customer customer = new Customer(name, phoneNumber);
 
 		if (mediaList.size() == 0) {
-			System.out.println("There are no books or movies in stock.");
+			System.out.println("  There are no books or movies in stock.");
 		} else {
 			for (int i = 0; i < mediaList.size(); i++) {
 				if (mediaList.get(i).articleNumber == articleNumber) {
-					System.out.println("Sucessfully lended " + mediaList.get(i).title + " to " + customer.getName());
+					System.out.println("  Successfully lended " + mediaList.get(i).title + " to " + customer.getName() + "\n");
 
 					rentedMedia.put(mediaList.get(i), customer);
 
@@ -195,6 +203,7 @@ public class Main {
 			}
 			writeToRentedFile();
 			writeToMediaFile();
+			System.out.println("  _____________________________________________________________________");
 		}
 
 	}
@@ -206,14 +215,15 @@ public class Main {
 
 		for (int i = 0; i < mediaList.size(); i++) {
 			if (mediaList.get(i).articleNumber == articleNumber && mediaList.get(i).inStock == true) {
-				System.out.print("The product is is not rented.\n");
+				System.out.print("  This product is currenly not rented by any customer.\n");
+				System.out.println("  _____________________________________________________________________");
 				mainMenu();
 			}
 		}
 
 		for (Media i : rentedMedia.keySet()) {
 			if (articleNumber == i.articleNumber) {
-				System.out.println(rentedMedia.get(i).getName());
+				
 				rentedMedia.remove(i);
 
 				for (int j = 0; j < mediaList.size(); j++) {
@@ -222,9 +232,11 @@ public class Main {
 					}
 				}
 
-				System.out.print(i + " is now returned to stock.\n");
+				System.out.print("  " + i + " is now returned to stock.\n");
 				writeToRentedFile();
 				writeToMediaFile();
+				
+				System.out.println("  _____________________________________________________________________");
 				mainMenu();
 			}
 		}
@@ -232,54 +244,52 @@ public class Main {
 
 	public static void register() { // This method is used to register a new book or movie to the library.
 
-		System.out.println("What are you registering? Book(b) or a Movie(m)");
+		System.out.println("  What are you registering? Book(b) or a Movie(m)");
 
 		String input = scanner.nextLine();
 
 		try {
 			if (input.equals("b")) {
 
-				System.out.println("Enter the product ID:");
+				System.out.println("\n  Enter the product ID:\n");
 
 				int articleNumber = Integer.parseInt(scanner.nextLine());
+				
+				System.out.println("> " + articleNumber + "\n");
 
 				checkArticleNumber(articleNumber);
 
 				checkForExistingMedia(articleNumber);
 
-				System.out.println("");
-
-				System.out.println("Enter the title of the book:");
+				System.out.println("  Enter the title of the book:\n");
 				String title = scanner.nextLine();
+				
+				System.out.println("> " + title + "\n");
 
-				System.out.println("");
+				System.out.println("  Enter the price:\n");
+				int price = Integer.parseInt(scanner.nextLine());
+				
+				System.out.println("> " + price + "\n");
 
-				System.out.println("Enter the price:");
-				int price = Integer.parseInt(scanner.next());
+				System.out.println("  Enter how many pages the book has:\n");
+				int pages = Integer.parseInt(scanner.nextLine());
+				
+				System.out.println("> " + pages + "\n");
 
-				System.out.println("");
-
-				System.out.println("Enter how many pages the book has:");
-				int pages = Integer.parseInt(scanner.next());
-
-				scanner.nextLine();
-
-				System.out.println("");
-
-				System.out.println("Enter the publisher:");
+				System.out.println("  Enter the publisher:\n");
 				String publisher = scanner.nextLine();
-
-				System.out.println("");
+				
+				System.out.println("> " + publisher + "\n");
 
 				Book book = new Book(articleNumber, title, price, pages, publisher);
 
 				mediaList.add(book);
 
-				System.out.println("The book: " + title + " was successfully added.");
-
-				System.out.println("");
+				System.out.println("  The book: " + title + " was successfully added.\n");
 
 				writeToMediaFile();
+				
+				System.out.println("  _____________________________________________________________________");
 
 				mainMenu();
 
@@ -287,55 +297,53 @@ public class Main {
 
 				System.out.println("");
 
-				System.out.println("Enter the product ID:");
+				System.out.println("  Enter the product ID:\n");
 				int articleNumber = Integer.parseInt(scanner.nextLine());
+				
+				System.out.println("> " + articleNumber + "\n");
 
 				checkArticleNumber(articleNumber);
 
 				checkForExistingMedia(articleNumber);
 
-				System.out.println("");
-
-				System.out.println("Enter the title of the movie:");
+				System.out.println("  Enter the title of the movie:\n");
 				String title = scanner.nextLine();
+				
+				System.out.println("> " + title + "\n");
 
-				System.out.println("");
+				System.out.println("  Enter the price:\n");
+				int price = Integer.parseInt(scanner.nextLine());
+				
+				System.out.println("> " + price + "\n");
 
-				System.out.println("Enter the price:");
-				int price = Integer.parseInt(scanner.next());
+				System.out.println("  Enter how long the movie is in minutes:\n");
+				int lengthMin = Integer.parseInt(scanner.nextLine());
+				
+				System.out.println("> " + lengthMin + "\n");
 
-				System.out.println("");
-
-				System.out.println("Enter how long the movie is in minutes:");
-				int lengthMin = Integer.parseInt(scanner.next());
-
-				System.out.println("");
-
-				System.out.println("What is the imdb-rating of this movie?:");
-				float imdbRating = Float.parseFloat(scanner.next());
-
-				System.out.println("");
+				System.out.println("  What is the imdb-rating of this movie?:\n");
+				float imdbRating = Float.parseFloat(scanner.nextLine());
+				
+				System.out.println("> " + imdbRating + "\n");
 
 				Movie movie = new Movie(articleNumber, title, price, lengthMin, imdbRating);
 
 				mediaList.add(movie);
 
-				System.out.println("The Movie: " + title + " was successfully added.");
-
-				System.out.println("");
+				System.out.println("  The Movie: " + title + " was successfully added.\n");
 
 				writeToMediaFile();
+				
+				System.out.println("  _____________________________________________________________________");
 
 				mainMenu();
 
 			} else {
-				System.out.println(input + " is not a valid input. Try again.");
-				System.out.println("");
+				System.out.println(input + " is not a valid input. Try again.\n");
 				register();
 			}
 		} catch (NumberFormatException e) {
-			System.out.println("The input must be digits.");
-			System.out.println(" ");
+			System.out.println("The input must be digits.\n");
 			register();
 		}
 
@@ -349,7 +357,7 @@ public class Main {
 
 		for (int i = 0; i < mediaList.size(); i++) {
 			if (mediaList.get(i).articleNumber == articleNumber) {
-				System.out.println("Successfully deregistered " + mediaList.get(i).title);
+				System.out.println("  Successfully deregistered: " + mediaList.get(i).title);
 				mediaList.remove(i);
 				writeToMediaFile();
 			}
@@ -365,25 +373,26 @@ public class Main {
 			if (mediaList.get(i) instanceof Book) {
 				Book b = (Book) mediaList.get(i);
 				if (mediaList.get(i).articleNumber == articleNumber) {
-					System.out.println("ID: " + mediaList.get(i).articleNumber);
-					System.out.println("Title: " + mediaList.get(i).title);
-					System.out.println("Price: " + mediaList.get(i).price + " kr");
-					System.out.println("Pages: " + b.pages);
-					System.out.println("Publisher: " + b.publisher);
+					System.out.println("  ID: " + mediaList.get(i).articleNumber);
+					System.out.println("  Title: " + mediaList.get(i).title);
+					System.out.println("  Price: " + mediaList.get(i).price + " kr");
+					System.out.println("  Pages: " + b.pages);
+					System.out.println("  Publisher: " + b.publisher);
 				}
 			}
 
 			if (mediaList.get(i) instanceof Movie) {
 				Movie m = (Movie) mediaList.get(i);
 				if (mediaList.get(i).articleNumber == articleNumber) {
-					System.out.println("ID: " + mediaList.get(i).articleNumber);
-					System.out.println("Title: " + mediaList.get(i).title);
-					System.out.println("Price: " + mediaList.get(i).price + " kr");
-					System.out.println("Length: " + m.lengthMin + " min");
-					System.out.println("IMDB rating: " + m.imdbScore);
+					System.out.println("  ID: " + mediaList.get(i).articleNumber);
+					System.out.println("  Title: " + mediaList.get(i).title);
+					System.out.println("  Price: " + mediaList.get(i).price + " kr");
+					System.out.println("  Length: " + m.lengthMin + " min");
+					System.out.println("  IMDB rating: " + m.imdbScore);
 				}
 			}
 		}
+		System.out.println("  _____________________________________________________________________");
 	}
 
 	enum Command {
@@ -428,7 +437,7 @@ public class Main {
 
 			System.out.println("");
 
-			System.out.println("Write your input:");
+			System.out.println("  Write your input:");
 
 			String userInput = scanner.nextLine();
 
@@ -440,7 +449,7 @@ public class Main {
 
 			Command command = parseCommand(userInput);
 			if (command == command.UNKNOWN) {
-				System.out.println("Unknown command. Try again.");
+				System.out.println("  Unknown command. Try again.");
 				continue;
 			}
 
@@ -449,7 +458,7 @@ public class Main {
 				argument = parseArguments(userInput);
 			} catch (NumberFormatException e) {
 
-				System.out.println("You can only use digits with Commands.");
+				System.out.println("  You can only use digits with Commands.");
 
 				mainMenu();
 			}
@@ -472,8 +481,8 @@ public class Main {
 			} else if (command == Command.INFO) {
 				info(argument);
 			} else if (command == Command.QUIT) {
-				System.out.println("Thanks for using the program.");
-				System.out.println("Saving...");
+				System.out.println("  Thanks for using the program.");
+				System.out.println("  Saving...");
 				writeToMediaFile();
 				System.exit(0);
 			}
@@ -486,24 +495,15 @@ public class Main {
 
 		readFiles();
 
-		System.out.println("Welcome to the library program!");
-
-		System.out.println("");
-
-		System.out.println("  Currently registered books and movies.");
-
-		System.out.println("");
+		System.out.println("\n  Welcome to the library program!\n");
 
 		list();
 
 		System.out.println("");
 
-		System.out.println(
-				"- list = View all the registered books or movies. \n- checkout + articlenumber = Loan a book or a movie to a customer.");
-		System.out.println(
-				"- checkin + articlenumber = Return a rented book or movie to the library. \n- register = Add a new book or movie to the library.");
-		System.out.println(
-				"- deregister + articlenumber = Remove a book or movie from the library. \n- info + articlenumber = Writes out information about the book or movie.");
+		System.out.println("- list = View all the registered books or movies. \n- checkout + articlenumber = Loan a book or a movie to a customer.");
+		System.out.println("- checkin + articlenumber = Return a rented book or movie to the library. \n- register = Add a new book or movie to the library.");
+		System.out.println("- deregister + articlenumber = Remove a book or movie from the library. \n- info + articlenumber = Writes out information about the book or movie.");
 		System.out.println("- quit = Exit the program");
 
 		System.out.println("");
