@@ -222,14 +222,14 @@ public class Main {
 
 		System.out.println("What are you registering? Book(b) or a Movie(m)");
 
-		String input = scanner.next();
+		String input = scanner.nextLine();
 
 		try {
 			if (input.equals("b")) {
 
 				System.out.println("Enter the product ID:");
 
-				int articleNumber = Integer.parseInt(scanner.next());
+				int articleNumber = Integer.parseInt(scanner.nextLine());
 
 				checkArticleNumber(articleNumber);
 
@@ -278,7 +278,7 @@ public class Main {
 				System.out.println("");
 
 				System.out.println("Enter the product ID:");
-				int articleNumber = Integer.parseInt(scanner.next());
+				int articleNumber = Integer.parseInt(scanner.nextLine());
 
 				checkArticleNumber(articleNumber);
 
