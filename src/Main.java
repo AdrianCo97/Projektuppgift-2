@@ -164,6 +164,7 @@ public class Main {
 		for (Media i : rentedMedia.keySet()) {
 			if (articleNumber == i.articleNumber) {
 				System.out.println(i + "Is already rented by: " + rentedMedia.get(i));
+				mainMenu();
 			}
 		}
 
@@ -239,8 +240,6 @@ public class Main {
 
 				System.out.println("");
 
-				scanner.nextLine();
-
 				System.out.println("Enter the title of the book:");
 				String title = scanner.nextLine();
 
@@ -287,8 +286,6 @@ public class Main {
 				checkForExistingMedia(articleNumber);
 
 				System.out.println("");
-
-				scanner.nextLine();
 
 				System.out.println("Enter the title of the movie:");
 				String title = scanner.nextLine();
