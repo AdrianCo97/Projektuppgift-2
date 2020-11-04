@@ -1,6 +1,5 @@
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -217,17 +216,6 @@ public class Main {
 				mainMenu();
 			}
 		}
-
-//		for (int i = 0; i < mediaList.size(); i++) {
-//			if (mediaList.get(i).articleNumber == articleNumber) {
-//
-//				System.out.print("rentedMedia.get(articleNumber): " + rentedMedia.get(i));
-//				mediaList.get(i).inStock = true;
-//
-//				System.out.print(mediaList.get(i) + " is now returned to stock.\n");
-//
-//			}
-//		}
 	}
 
 	public static void register() { // This method is used to register a new book or movie to the library.
@@ -351,39 +339,9 @@ public class Main {
 			if (mediaList.get(i).articleNumber == articleNumber) {
 				System.out.println("Successfully deregistered " + mediaList.get(i).title);
 				mediaList.remove(i);
-				try {
-					new FileWriter("books.txt", false).close();
-					new FileWriter("movies.txt", false).close();
-
-				} catch (IOException e) {
-
-					e.printStackTrace();
-				}
-
-//				for (int j = 0; j < mediaList.size(); j++) {
-//
-//					if (mediaList.get(j) instanceof Book) {
-//						Book b = (Book) mediaList.get(j);
-//
-//						writeToBookFile(b);
-//
-//					}
-//					if (mediaList.get(j) instanceof Movie) {
-//						Movie m = (Movie) mediaList.get(j);
-//
-//						writeToMovieFile(m);
-//					}
-//				}
-
-			} else {
-				System.out.print(
-						"The product is already rented. Please use checkin on this book or movie before using deregister.");
-				break;
-
+				writeToMediaFile();
 			}
-
 		}
-
 	}
 
 	public static void info(int articleNumber) {
