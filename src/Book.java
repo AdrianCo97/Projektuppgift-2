@@ -1,6 +1,6 @@
 
 public class Book extends Media{
-	
+
 	public int pages;
 	public String publisher;
 	

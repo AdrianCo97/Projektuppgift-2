@@ -1,4 +1,5 @@
 
+
 public class Movie extends Media{
 
 	public int lengthMin;

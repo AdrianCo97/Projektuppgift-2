@@ -1,5 +1,5 @@
-
-public abstract class Media implements Comparable<Media> {
+import java.io.*;
+public abstract class Media implements Serializable, Comparable<Media>  {
 
 	protected int articleNumber;
 	protected String title;

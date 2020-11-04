@@ -1,12 +1,8 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.io.*;
 
 public class Main {
 
@@ -44,6 +40,24 @@ public class Main {
 		}
 
 	}
+	
+	public static void checkForExistingMedia(int articleNumber) {
+		for(Media i : rentedMedia.keySet()) {
+			if(articleNumber == i.articleNumber) {
+				System.out.println(i + " already exists and it's currently rented by: " + rentedMedia.get(i));
+				System.out.println("");
+				mainMenu();
+			}
+		}
+		
+		for (int i = 0; i < mediaList.size(); i++) {
+			if (articleNumber == mediaList.get(i).articleNumber) {
+				System.out.println("A book or movie with this ID already exists. Try again");
+				System.out.println("");
+				mainMenu();
+			}
+		}
+	}
 
 	public static void checkInStock(int articleNumberToCheck) {
 		for (int i = 0; i < mediaList.size(); i++) {
@@ -61,6 +75,7 @@ public class Main {
 										// creates a new book or movie based on those values.
 
 		try {
+			
 
 			BufferedReader bufferedBookReader = new BufferedReader(new FileReader("books.txt"));
 
@@ -107,15 +122,25 @@ public class Main {
 
 			}
 			
+			FileInputStream fInput = new FileInputStream("rented.txt");
+			ObjectInputStream oInput = new ObjectInputStream(fInput);
 			
+			rentedMedia = (HashMap)oInput.readObject();
+			
+			fInput.close();
+			oInput.close();
 			bufferedBookReader.close();
 			bufferedMovieReader.close();
 		} catch (IOException e) {
 			System.out.println("The program couldn't find the file or files.");
+		} catch (ClassNotFoundException e) {
+			System.out.println("The program couldn't deserialize from the file");
 		}
+		
 
 	}
 
+	
 	public static void writeToBookFile(Book book) { // This method takes a book and prints the values into a txt file.
 
 		try {
@@ -133,7 +158,7 @@ public class Main {
 		}
 
 	}
-
+	
 	public static void writeToMovieFile(Movie movie) {
 
 		try {
@@ -155,17 +180,19 @@ public class Main {
 	public static void writeToRentedFile() { // This method writes the entire hashMap into a txt file called "rented".
 												// This is to track what's rented to who.
 		try {
-			FileWriter fW = new FileWriter("rented.txt");
-			PrintWriter pW = new PrintWriter(fW);
+			FileOutputStream fOutput = new FileOutputStream("rented.txt");
+			ObjectOutputStream oOutput = new ObjectOutputStream(fOutput);
 
-			for (Media i : rentedMedia.keySet()) {
-				pW.println(i + " rented by: " + rentedMedia.get(i));
-			}
-			pW.close();
+			oOutput.writeObject(rentedMedia);
+			
+			fOutput.close();
+			oOutput.close();
 		} catch (IOException e) {
 			System.out.println("The program couldn't find the file.");
 		}
 	}
+	
+	
 
 	public static void list() {
 		// Method to list all products
@@ -190,11 +217,10 @@ public class Main {
 		checkArticleNumber(articleNumber);
 
 		checkArticleNumberMatch(articleNumber);
-
-		for (Media i : rentedMedia.keySet()) {
-			if (articleNumber == i.articleNumber) {
-				System.out.println(i + " Is already rented by " + rentedMedia.get(i));
-				mainMenu();
+		
+		for(Media i : rentedMedia.keySet()) {
+			if(articleNumber == i.articleNumber) {
+				System.out.println(i + "Is already rented by: " + rentedMedia.get(i));
 			}
 		}
 
@@ -280,13 +306,8 @@ public class Main {
 				int articleNumber = Integer.parseInt(scanner.next());
 
 				checkArticleNumber(articleNumber);
-
-				for (int i = 0; i < mediaList.size(); i++) {
-					if (articleNumber == mediaList.get(i).articleNumber) {
-						System.out.println("A book or movie with this ID already exists. Try again");
-						register();
-					}
-				}
+				
+				checkForExistingMedia(articleNumber);
 
 				System.out.println("");
 
@@ -334,13 +355,8 @@ public class Main {
 				int articleNumber = Integer.parseInt(scanner.next());
 
 				checkArticleNumber(articleNumber);
-
-				for (int i = 0; i < mediaList.size(); i++) {
-					if (articleNumber == mediaList.get(i).articleNumber) {
-						System.out.println("A book or movie with this ID already exists. Try again");
-						register();
-					}
-				}
+				
+				checkForExistingMedia(articleNumber);
 
 				System.out.println("");
 
