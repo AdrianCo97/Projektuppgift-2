@@ -151,7 +151,7 @@ public class Main {
 			}
 		}
 		for (Media m : rentedMedia.keySet()) {
-			System.out.println(m + " is rented by: " + rentedMedia.get(m));
+			System.out.println("  " +m + " is rented by: " + rentedMedia.get(m));
 		}
 	}
 
@@ -193,6 +193,7 @@ public class Main {
 
 			}
 			writeToRentedFile();
+			writeToMediaFile();
 		}
 
 	}
@@ -213,6 +214,7 @@ public class Main {
 
 				System.out.print(i + " is now returned to stock.\n");
 				writeToRentedFile();
+				writeToMediaFile();
 				mainMenu();
 			}
 		}
