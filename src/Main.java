@@ -178,13 +178,13 @@ public class Main {
 
 		String name = scanner.nextLine();
 		
-		System.out.println("> " + name + "\n");
+		System.out.println("\n> " + name + "\n");
 
 		System.out.println("  Enter the customers phone number: ");
 
 		String phoneNumber = scanner.nextLine();
 		
-		System.out.println("> " + phoneNumber + "\n");
+		System.out.println("\n> " + phoneNumber + "\n");
 
 		Customer customer = new Customer(name, phoneNumber);
 
@@ -255,7 +255,7 @@ public class Main {
 
 				int articleNumber = Integer.parseInt(scanner.nextLine());
 				
-				System.out.println("> " + articleNumber + "\n");
+				System.out.println("\n> " + articleNumber + "\n");
 
 				checkArticleNumber(articleNumber);
 
@@ -264,22 +264,22 @@ public class Main {
 				System.out.println("  Enter the title of the book:\n");
 				String title = scanner.nextLine();
 				
-				System.out.println("> " + title + "\n");
+				System.out.println("\n> " + title + "\n");
 
 				System.out.println("  Enter the price:\n");
 				int price = Integer.parseInt(scanner.nextLine());
 				
-				System.out.println("> " + price + "\n");
+				System.out.println("\n> " + price + "\n");
 
 				System.out.println("  Enter how many pages the book has:\n");
 				int pages = Integer.parseInt(scanner.nextLine());
 				
-				System.out.println("> " + pages + "\n");
+				System.out.println("\n> " + pages + "\n");
 
 				System.out.println("  Enter the publisher:\n");
 				String publisher = scanner.nextLine();
 				
-				System.out.println("> " + publisher + "\n");
+				System.out.println("\n> " + publisher + "\n");
 
 				Book book = new Book(articleNumber, title, price, pages, publisher);
 
@@ -300,7 +300,7 @@ public class Main {
 				System.out.println("  Enter the product ID:\n");
 				int articleNumber = Integer.parseInt(scanner.nextLine());
 				
-				System.out.println("> " + articleNumber + "\n");
+				System.out.println("\n> " + articleNumber + "\n");
 
 				checkArticleNumber(articleNumber);
 
@@ -309,22 +309,22 @@ public class Main {
 				System.out.println("  Enter the title of the movie:\n");
 				String title = scanner.nextLine();
 				
-				System.out.println("> " + title + "\n");
+				System.out.println("\n> " + title + "\n");
 
 				System.out.println("  Enter the price:\n");
 				int price = Integer.parseInt(scanner.nextLine());
 				
-				System.out.println("> " + price + "\n");
+				System.out.println("\n> " + price + "\n");
 
 				System.out.println("  Enter how long the movie is in minutes:\n");
 				int lengthMin = Integer.parseInt(scanner.nextLine());
 				
-				System.out.println("> " + lengthMin + "\n");
+				System.out.println("\n> " + lengthMin + "\n");
 
 				System.out.println("  What is the imdb-rating of this movie?:\n");
 				float imdbRating = Float.parseFloat(scanner.nextLine());
 				
-				System.out.println("> " + imdbRating + "\n");
+				System.out.println("\n> " + imdbRating + "\n");
 
 				Movie movie = new Movie(articleNumber, title, price, lengthMin, imdbRating);
 
@@ -437,15 +437,11 @@ public class Main {
 
 			System.out.println("");
 
-			System.out.println("  Write your input:");
+			System.out.println("  Write your command:");
 
 			String userInput = scanner.nextLine();
 
-			System.out.println("");
-
-			System.out.println("> " + userInput);
-
-			System.out.println("");
+			System.out.println("\n> " + userInput + "\n");
 
 			Command command = parseCommand(userInput);
 			if (command == command.UNKNOWN) {
