@@ -1,8 +1,13 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.io.*;
 
 public class Main {
 
@@ -40,16 +45,16 @@ public class Main {
 		}
 
 	}
-	
+
 	public static void checkForExistingMedia(int articleNumber) {
-		for(Media i : rentedMedia.keySet()) {
-			if(articleNumber == i.articleNumber) {
+		for (Media i : rentedMedia.keySet()) {
+			if (articleNumber == i.articleNumber) {
 				System.out.println(i + " already exists and it's currently rented by: " + rentedMedia.get(i));
 				System.out.println("");
 				mainMenu();
 			}
 		}
-		
+
 		for (int i = 0; i < mediaList.size(); i++) {
 			if (articleNumber == mediaList.get(i).articleNumber) {
 				System.out.println("A book or movie with this ID already exists. Try again");
@@ -72,39 +77,34 @@ public class Main {
 	}
 
 	public static void readFiles() { // This method reads the files. Seperates each word by the comma. It then
-		                             // creates a new book or movie based on those values.
-		
+										// creates a new book or movie based on those values.
+
 		try {
-			
+
 			FileInputStream movieInput = new FileInputStream("mediadata.txt");
-            ObjectInputStream mOInput = new ObjectInputStream(movieInput);
-            
-            mediaList = (ArrayList<Media>) mOInput.readObject();
-            
-            movieInput.close();
+			ObjectInputStream mOInput = new ObjectInputStream(movieInput);
+
+			mediaList = (ArrayList<Media>) mOInput.readObject();
+
+			movieInput.close();
 			mOInput.close();
-            
-   		
+
 			FileInputStream fInput = new FileInputStream("rented.txt");
 			ObjectInputStream oInput = new ObjectInputStream(fInput);
-			
-			rentedMedia = (HashMap)oInput.readObject();
-			
+
+			rentedMedia = (HashMap) oInput.readObject();
+
 			fInput.close();
 			oInput.close();
-		    
-			
+
 		} catch (IOException e) {
-			
+
 		} catch (ClassNotFoundException e) {
 			System.out.println("The program couldn't dezerialize from the file");
 		}
-		
 
 	}
 
-	
-	
 	public static void writeToMediaFile() { // This method takes a book and prints the values into a txt file.
 
 		try {
@@ -113,7 +113,7 @@ public class Main {
 			ObjectOutputStream oOutput = new ObjectOutputStream(fOutput);
 
 			oOutput.writeObject(mediaList);
-			
+
 			fOutput.close();
 			oOutput.close();
 
@@ -123,7 +123,6 @@ public class Main {
 
 	}
 
-
 	public static void writeToRentedFile() { // This method writes the entire hashMap into a txt file called "rented".
 												// This is to track what's rented to who.
 		try {
@@ -131,30 +130,28 @@ public class Main {
 			ObjectOutputStream oOutput = new ObjectOutputStream(fOutput);
 
 			oOutput.writeObject(rentedMedia);
-			
+
 			fOutput.close();
 			oOutput.close();
 		} catch (IOException e) {
 			System.out.println("The program couldn't find the file.");
 		}
 	}
-	
-	
 
 	public static void list() {
 		// Method to list all products
 
 		Collections.sort(mediaList);
-		
-		if(mediaList.size() == 0) {
+
+		if (mediaList.size() == 0) {
 			System.out.println("  There are no registered books or movies.");
 		}
-		for(Media m : mediaList) {
-			if(m.inStock) {
+		for (Media m : mediaList) {
+			if (m.inStock) {
 				System.out.println("  " + m + " (in stock)");
 			}
 		}
-		for(Media m : rentedMedia.keySet()) {
+		for (Media m : rentedMedia.keySet()) {
 			System.out.println(m + " is rented by: " + rentedMedia.get(m));
 		}
 	}
@@ -164,9 +161,9 @@ public class Main {
 		checkArticleNumber(articleNumber);
 
 		checkArticleNumberMatch(articleNumber);
-		
-		for(Media i : rentedMedia.keySet()) {
-			if(articleNumber == i.articleNumber) {
+
+		for (Media i : rentedMedia.keySet()) {
+			if (articleNumber == i.articleNumber) {
 				System.out.println(i + "Is already rented by: " + rentedMedia.get(i));
 			}
 		}
@@ -191,28 +188,46 @@ public class Main {
 					System.out.println("Sucessfully lended " + mediaList.get(i).title + " to " + customer.getName());
 
 					rentedMedia.put(mediaList.get(i), customer);
-					
+
 					mediaList.get(i).inStock = false;
 				}
-				
+
 			}
 			writeToRentedFile();
 		}
-		
+
 	}
-	
 
 	public static void checkIn(int articleNumber) {
 		// Method for returning a lent product
 		checkArticleNumber(articleNumber);
+		for (Media i : rentedMedia.keySet()) {
+			if (articleNumber == i.articleNumber) {
+				System.out.println(rentedMedia.get(i).getName());
+				rentedMedia.remove(i);
 
-		for (int i = 0; i < mediaList.size(); i++) {
-			if (mediaList.get(i).articleNumber == articleNumber) {
-				rentedMedia.remove(mediaList.get(i));
-				mediaList.get(i).inStock = true;
-				System.out.print(mediaList.get(i) + " is now returned to stock.\n");
+				for (int j = 0; j < mediaList.size(); j++) {
+					if (mediaList.get(j).articleNumber == articleNumber) {
+						mediaList.get(j).inStock = true;
+					}
+				}
+
+				System.out.print(i + " is now returned to stock.\n");
+				writeToRentedFile();
+				mainMenu();
 			}
 		}
+
+//		for (int i = 0; i < mediaList.size(); i++) {
+//			if (mediaList.get(i).articleNumber == articleNumber) {
+//
+//				System.out.print("rentedMedia.get(articleNumber): " + rentedMedia.get(i));
+//				mediaList.get(i).inStock = true;
+//
+//				System.out.print(mediaList.get(i) + " is now returned to stock.\n");
+//
+//			}
+//		}
 	}
 
 	public static void register() { // This method is used to register a new book or movie to the library.
@@ -229,7 +244,7 @@ public class Main {
 				int articleNumber = Integer.parseInt(scanner.next());
 
 				checkArticleNumber(articleNumber);
-				
+
 				checkForExistingMedia(articleNumber);
 
 				System.out.println("");
@@ -276,7 +291,7 @@ public class Main {
 				int articleNumber = Integer.parseInt(scanner.next());
 
 				checkArticleNumber(articleNumber);
-				
+
 				checkForExistingMedia(articleNumber);
 
 				System.out.println("");
@@ -341,7 +356,7 @@ public class Main {
 					new FileWriter("movies.txt", false).close();
 
 				} catch (IOException e) {
-					
+
 					e.printStackTrace();
 				}
 
@@ -361,9 +376,9 @@ public class Main {
 //				}
 
 			} else {
-				System.out.print("The product is already rented. Please use checkin on this book or movie before using deregister.");
+				System.out.print(
+						"The product is already rented. Please use checkin on this book or movie before using deregister.");
 				break;
-
 
 			}
 
