@@ -95,9 +95,9 @@ public class Main {
 		    
 			
 		} catch (IOException e) {
-			System.out.println("The program couldn't find the file or files.");
+			
 		} catch (ClassNotFoundException e) {
-			System.out.println("The program couldn't deserialize from the file");
+			System.out.println("The program couldn't dezerialize from the file");
 		}
 		
 
@@ -109,7 +109,7 @@ public class Main {
 
 		try {
 
-			FileOutputStream fOutput = new FileOutputStream("mediadata.txt", true);
+			FileOutputStream fOutput = new FileOutputStream("mediadata.txt");
 			ObjectOutputStream oOutput = new ObjectOutputStream(fOutput);
 
 			oOutput.writeObject(mediaList);
@@ -145,17 +145,17 @@ public class Main {
 		// Method to list all products
 
 		Collections.sort(mediaList);
-		if (mediaList.size() > 0) {
-			for (int i = 0; i < mediaList.size(); i++) {
-				if (mediaList.get(i).inStock) {
-					System.out.println("  " + mediaList.get(i) + " (in stock)");
-				}
+		
+		if(mediaList.size() == 0) {
+			System.out.println("  There are no registered books or movies.");
+		}
+		for(Media m : mediaList) {
+			if(m.inStock) {
+				System.out.println("  " + m + " (in stock)");
 			}
-			for (Media i : rentedMedia.keySet()) {
-				System.out.println("  " + i + " is rented by: " + rentedMedia.get(i));
-			}
-		} else {
-			System.out.println("There are no books or movies registered.");
+		}
+		for(Media m : rentedMedia.keySet()) {
+			System.out.println(m + " is rented by: " + rentedMedia.get(m));
 		}
 	}
 
