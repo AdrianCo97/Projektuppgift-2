@@ -151,7 +151,7 @@ public class Main {
 			}
 		}
 		for (Media m : rentedMedia.keySet()) {
-			System.out.println("  " +m + " is rented by: " + rentedMedia.get(m));
+			System.out.println("  " + m + " is rented by: " + rentedMedia.get(m));
 		}
 	}
 
@@ -202,6 +202,15 @@ public class Main {
 	public static void checkIn(int articleNumber) {
 		// Method for returning a lent product
 		checkArticleNumber(articleNumber);
+		checkArticleNumberMatch(articleNumber);
+
+		for (int i = 0; i < mediaList.size(); i++) {
+			if (mediaList.get(i).articleNumber == articleNumber && mediaList.get(i).inStock == true) {
+				System.out.print("The product is is not rented.\n");
+				mainMenu();
+			}
+		}
+
 		for (Media i : rentedMedia.keySet()) {
 			if (articleNumber == i.articleNumber) {
 				System.out.println(rentedMedia.get(i).getName());
@@ -269,11 +278,11 @@ public class Main {
 				System.out.println("The book: " + title + " was successfully added.");
 
 				System.out.println("");
-				
+
 				writeToMediaFile();
 
 				mainMenu();
-				
+
 			} else if (input.equals("m")) {
 
 				System.out.println("");
@@ -314,12 +323,10 @@ public class Main {
 				System.out.println("The Movie: " + title + " was successfully added.");
 
 				System.out.println("");
-				
+
 				writeToMediaFile();
 
 				mainMenu();
-				
-				
 
 			} else {
 				System.out.println(input + " is not a valid input. Try again.");
