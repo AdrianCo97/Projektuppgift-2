@@ -99,12 +99,12 @@ public class Main {
 		} catch (IOException e) {
 
 		} catch (ClassNotFoundException e) {
-			System.out.println("The program couldn't dezerialize from the file");
+			System.out.println("The program couldn't dezerialize from the file.");
 		}
 
 	}
 
-	public static void writeToMediaFile() { // This method takes a book and prints the values into a txt file.
+	public static void writeToMediaFile() { // This method serializes the ArrayList(mediaList) and prints it in binary in the file mediadata.txt.
 
 		try {
 
