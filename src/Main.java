@@ -270,6 +270,8 @@ public class Main {
 				System.out.println("");
 
 				mainMenu();
+				
+				writeToMediaFile();
 
 			} else if (input.equals("m")) {
 
@@ -315,6 +317,8 @@ public class Main {
 				System.out.println("");
 
 				mainMenu();
+				
+				writeToMediaFile();
 
 			} else {
 				System.out.println(input + " is not a valid input. Try again.");
