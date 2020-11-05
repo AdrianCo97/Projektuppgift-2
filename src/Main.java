@@ -1,8 +1,4 @@
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -63,18 +59,35 @@ public class Main {
 		for (int i = 0; i < mediaList.size(); i++) {
 
 			if (mediaList.get(i).articleNumber == articleNumberToCheck && mediaList.get(i).inStock == false) {
-				System.out.print("  The product is rented. Please checkin before deregister.");
+				System.out.print("  The product is already rented. Please use checkin before using deregister.");
 				mainMenu();
 
 			}
 
 		}
 	}
-
-	public static void readFiles() { // This method reads the files. Seperates each word by the comma. It then
-										// creates a new book or movie based on those values.
-
+	
+	public static void createNewFiles() {
+		File mediaData = new File("mediadata.txt");			
+		File rentedFile = new File("rented.txt");
 		try {
+			if(!mediaData.exists()) {
+				mediaData.createNewFile();
+			}
+			else if(!rentedFile.exists()) {
+				rentedFile.createNewFile();
+			}
+		}
+		catch(IOException e) {
+		}
+	}
+
+	public static void readFiles() { //This method reads the bytes from the files storing the ArrayList and HashMap. 
+		
+		createNewFiles();
+		
+		try {
+			
 
 			FileInputStream movieInput = new FileInputStream("mediadata.txt");
 			ObjectInputStream mOInput = new ObjectInputStream(movieInput);
@@ -101,6 +114,8 @@ public class Main {
 	}
 
 	public static void writeToMediaFile() { // This method serializes the ArrayList(mediaList) and prints it in binary in the file mediadata.txt.
+		
+		createNewFiles();
 
 		try {
 
@@ -120,6 +135,8 @@ public class Main {
 
 	public static void writeToRentedFile() { // This method writes the entire hashMap into a txt file called "rented".
 												// This is to track what's rented to who.
+		createNewFiles();
+		
 		try {
 			FileOutputStream fOutput = new FileOutputStream("rented.txt");
 			ObjectOutputStream oOutput = new ObjectOutputStream(fOutput);
