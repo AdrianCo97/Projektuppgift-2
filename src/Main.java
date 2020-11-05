@@ -151,10 +151,14 @@ public class Main {
 		}
 		System.out.println("");
 		
-		if(rentedMedia.size() > 0) {
+		ArrayList<Media> keyValues = new ArrayList<>(rentedMedia.keySet());
+		
+		Collections.sort(keyValues);
+		
+		if (rentedMedia.size() > 0) {
 			System.out.println("  Currently rented books and movies:\n");
 		}
-		for (Media m : rentedMedia.keySet()) {
+		for (Media m : keyValues) {
 			System.out.println("  " + m + " is rented by: " + rentedMedia.get(m));
 		}
 		System.out.println("  _____________________________________________________________________");
