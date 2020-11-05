@@ -182,6 +182,8 @@ public class Main {
 	}
 
 	public static void checkOut(int articleNumber) { // This method is used to rent a product to a customer.
+		
+		createNewFiles();
 
 		checkArticleNumber(articleNumber);
 
@@ -231,6 +233,9 @@ public class Main {
 
 	public static void checkIn(int articleNumber) {
 		// Method for returning a lent product
+		
+		createNewFiles();
+		
 		checkArticleNumber(articleNumber);
 		checkArticleNumberMatch(articleNumber);
 
@@ -264,6 +269,8 @@ public class Main {
 	}
 
 	public static void register() { // This method is used to register a new book or movie to the library.
+		
+		createNewFiles();
 
 		System.out.println("  What are you registering? Book(b) or a Movie(m)");
 
@@ -372,6 +379,8 @@ public class Main {
 
 	public static void deRegister(int articleNumber) {
 		// Method for deregister a book from stock. Updates files.
+		
+		createNewFiles();
 		checkArticleNumber(articleNumber);
 		checkArticleNumberMatch(articleNumber);
 		checkInStock(articleNumber);
