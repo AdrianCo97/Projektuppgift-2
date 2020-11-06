@@ -17,6 +17,7 @@ public class Main {
 	public static void checkArticleNumber(int articleNumber) {
 		if (articleNumber < 10000 || articleNumber > 99999) {
 			System.out.println("  Invalid article ID, expecting 10000-99999. Please try again.\n");
+			System.out.println("  _____________________________________________________________________");
 			mainMenu();
 		}
 	}
@@ -34,6 +35,7 @@ public class Main {
 
 		if (match == false) {
 			System.out.println("  There are no registered products with this ID.\n");
+			System.out.println("  _____________________________________________________________________");
 			mainMenu();
 		}
 
@@ -42,7 +44,8 @@ public class Main {
 	public static void checkForExistingMedia(int articleNumber) {
 		for (Media i : rentedMedia.keySet()) {
 			if (articleNumber == i.articleNumber) {
-				System.out.println(i + " already exists and it's currently rented by: " + rentedMedia.get(i) + "\n");
+				System.out.println("  " + i + " already exists and it's currently rented by: " + rentedMedia.get(i) + "\n");
+				System.out.println("  _____________________________________________________________________");
 				mainMenu();
 			}
 		}
@@ -50,6 +53,7 @@ public class Main {
 		for (int i = 0; i < mediaList.size(); i++) {
 			if (articleNumber == mediaList.get(i).articleNumber) {
 				System.out.println("  A book or movie with this ID already exists. Try again\n");
+				System.out.println("  _____________________________________________________________________");
 				mainMenu();
 			}
 		}
@@ -59,7 +63,8 @@ public class Main {
 		for (int i = 0; i < mediaList.size(); i++) {
 
 			if (mediaList.get(i).articleNumber == articleNumberToCheck && mediaList.get(i).inStock == false) {
-				System.out.print("  The product is already rented. Please use checkin before using deregister.");
+				System.out.print("  The product is currently rented. Please use checkin before using deregister.\n");
+				System.out.println("  _____________________________________________________________________");
 				mainMenu();
 
 			}
@@ -191,7 +196,7 @@ public class Main {
 
 		for (Media i : rentedMedia.keySet()) {
 			if (articleNumber == i.articleNumber) {
-				System.out.println(i + "Is already rented by: " + rentedMedia.get(i));
+				System.out.println("  " + i + " is already rented by: " + rentedMedia.get(i));
 				System.out.println("  _____________________________________________________________________");
 				mainMenu();
 			}
