@@ -372,7 +372,7 @@ public class Main {
 				mainMenu();
 
 			} else {
-				System.out.println(input + " is not a valid input. Try again.\n");
+				System.out.println("  " + input + " is not a valid input. Try again.\n");
 				register();
 			}
 		} catch (NumberFormatException e) {
