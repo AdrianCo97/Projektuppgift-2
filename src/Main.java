@@ -472,7 +472,7 @@ public class Main {
 
 			System.out.println("");
 
-			System.out.println("  Write your command:");
+			System.out.println("  Write your command:\n");
 
 			String userInput = scanner.nextLine();
 
